@@ -1,0 +1,58 @@
+*filestyle.txt* Plugin checking text to correspond current Vim setting
+
+===============================================================================
+CONTENTS                                                    *FileStyleContents*
+
+    1. Istallation ................................. |FileStyleInstallation|
+    2. Usage ....................................... |FileStyleUsage|
+    3. License ......................................|FileStyleLicense|
+    4. Credits ......................................|FileStyleCredits|
+
+
+===============================================================================
+Section 1: Installation                                 *FileStyleInstallation*
+
+    If you use Pathogen (recommended) just clone the repository:
+
+        https://github.com/aserebryakov/filestyle
+
+    to your <vim files path>/bundle/ directory.
+
+    Otherwise, you need to copy files to your <vim files path> directory.
+
+
+===============================================================================
+Section 2: Usage                                               *FileStyleUsage*
+
+    There are no specific usage instructions. Plugin is loaded automatically
+    and checks each opened file to correspond Vim settings.
+
+    What is checked:
+    1. If you use |expandtab| option, then all '\t' characters are highlighted,
+       otherwise spaces in begining of the line are highlighted
+    2. Traling spaces are highlighted
+
+===============================================================================
+Section 3: License                                           *FileStyleLicense*
+
+    Copyright 2014 Alexander Serebryakov
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+
+===============================================================================
+Section 4: Credits                                           *FileStyleCredits*
+
+    Author: Alexander Serebryakov
+    GitHub: https://github.com/aserebryakov
+
