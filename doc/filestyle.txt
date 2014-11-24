@@ -6,7 +6,8 @@ CONTENTS                                                    *FileStyleContents*
     1. Istallation ................................. |FileStyleInstallation|
     2. Usage ....................................... |FileStyleUsage|
     3. License ......................................|FileStyleLicense|
-    4. Credits ......................................|FileStyleCredits|
+    4. Contribution .................................|FileStyleContribution|
+    5. Credits ......................................|FileStyleCredits|
 
 
 ===============================================================================
@@ -16,9 +17,9 @@ Section 1: Installation                                 *FileStyleInstallation*
 
         https://github.com/aserebryakov/filestyle
 
-    to your <vim files path>/bundle/ directory.
+    to your <vim_files_path>/bundle/ directory.
 
-    Otherwise, you need to copy files to your <vim files path> directory.
+    Otherwise, you need to copy files to your <vim_files_path> directory.
 
 
 ===============================================================================
@@ -27,10 +28,11 @@ Section 2: Usage                                               *FileStyleUsage*
     There are no specific usage instructions. Plugin is loaded automatically
     and checks each opened file to correspond Vim settings.
 
-    What is checked:
-    1. If you use |expandtab| option, then all '\t' characters are highlighted,
+    Current functionality:
+    1. If |expandtab| option is used, then all '\t' characters are highlighted,
        otherwise spaces in begining of the line are highlighted
     2. Traling spaces are highlighted
+
 
 ===============================================================================
 Section 3: License                                           *FileStyleLicense*
@@ -51,7 +53,17 @@ Section 3: License                                           *FileStyleLicense*
 
 
 ===============================================================================
-Section 4: Credits                                           *FileStyleCredits*
+Section 4: Contribution                                 *FileStyleContribution*
+
+    Plugin source is available on GitHub by the link:
+
+        https://github.com/aserebryakov/filestyle
+
+    If you want to improve this plugin, just fork the repository.
+
+
+===============================================================================
+Section 5: Credits                                           *FileStyleCredits*
 
     Author: Alexander Serebryakov
     GitHub: https://github.com/aserebryakov
