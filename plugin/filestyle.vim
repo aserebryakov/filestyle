@@ -28,13 +28,8 @@ endif
 
 "Highlighting specified pattern
 function FileStyleHighlightPattern(pattern)
-    if !exists("b:filestyle_match")
-        let b:filestyle_match = 0
-    else
-        call matchdelete(b:filestyle_match)
-    endif
-
-    let b:filestyle_match = matchadd('FileStyleError', a:pattern)
+    call clearmatches()
+    call matchadd('FileStyleError', a:pattern)
 endfunction
 
 
