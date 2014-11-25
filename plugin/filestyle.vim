@@ -28,7 +28,6 @@ endif
 
 "Highlighting specified pattern
 function FileStyleHighlightPattern(pattern)
-    call clearmatches()
     call matchadd('FileStyleError', a:pattern)
 endfunction
 
@@ -52,6 +51,7 @@ endfunction
 
 "Checking file dependenly on settings
 function FileStyleCheck()
+    call clearmatches()
     call FileStyleExpandtabCheck()
     call FileStyleTrailingSpaces()
 endfunction
