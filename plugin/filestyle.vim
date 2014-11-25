@@ -16,7 +16,7 @@
 
 if !exists("g:filestyle_plugin")
     let g:filestyle_plugin = 1
-    highligh FileStyleError ctermbg=Red
+    highligh FileStyleError ctermbg=Red guibg=Red
 
     "Defining auto commands
     augroup FileStyleAutoCommands
