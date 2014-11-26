@@ -1,13 +1,14 @@
-*filestyle.txt* Plugin checking text to correspond current Vim setting
+*filestyle.txt* Plugin checking text to correspond current Vim settings
 
 ===============================================================================
 CONTENTS                                                    *FileStyleContents*
 
     1. Istallation ................................. |FileStyleInstallation|
     2. Usage ....................................... |FileStyleUsage|
-    3. License ......................................|FileStyleLicense|
-    4. Contribution .................................|FileStyleContribution|
-    5. Credits ......................................|FileStyleCredits|
+    3. License ..................................... |FileStyleLicense|
+    4. Contribution ................................ |FileStyleContribution|
+    5. Changelog ................................... |FileStyleChangelog|
+    6. Credits ..................................... |FileStyleCredits|
 
 
 ===============================================================================
@@ -63,7 +64,15 @@ Section 4: Contribution                                 *FileStyleContribution*
 
 
 ===============================================================================
-Section 5: Credits                                           *FileStyleCredits*
+Section 5: Changelog                                       *FileStyleChangelog*
+
+    Version 0.5.0   Implemented basic functionality:
+                        - highlighting of trailing spaces
+                        - highlighting of incorrect indentation
+
+
+===============================================================================
+Section 6: Credits                                           *FileStyleCredits*
 
     Author: Alexander Serebryakov
     GitHub: https://github.com/aserebryakov
