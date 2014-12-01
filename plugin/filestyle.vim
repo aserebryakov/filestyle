@@ -14,45 +14,45 @@
 
 "Plugin checking the file to follow Your Vim settings
 
-if !exists("g:filestyle_plugin")
-    let g:filestyle_plugin = 1
-    highligh FileStyleError ctermbg=Red guibg=Red
+if !exists('g:filestyle_plugin')
+  let g:filestyle_plugin = 1
+  highligh FileStyleError ctermbg=Red guibg=Red
 
-    "Defining auto commands
-    augroup FileStyleAutoCommands
-        autocmd!
-        autocmd BufReadPost * call FileStyleCheck()
-    augroup end
+  "Defining auto commands
+  augroup file_style_auto_commands
+    autocmd!
+    autocmd BufReadPost * call FileStyleCheck()
+  augroup end
 endif
 
 
 "Highlighting specified pattern
 function FileStyleHighlightPattern(pattern)
-    call matchadd('FileStyleError', a:pattern)
+  call matchadd('FileStyleError', a:pattern)
 endfunction
 
 
 "Checking expandtab option
 function FileStyleExpandtabCheck()
-    if &expandtab
-        let l:filestyle_search_pattern = '\t\+'
-    else
-        let l:filestyle_search_pattern = '^ \+'
-    endif
-    call FileStyleHighlightPattern(l:filestyle_search_pattern)
+  if &expandtab
+    let l:search_pattern = '\t\+'
+  else
+    let l:search_pattern = '^ \+'
+  endif
+  call FileStyleHighlightPattern(l:search_pattern)
 endfunction
 
 
 "Checking trailing spaces
 function FileStyleTrailingSpaces()
-    call FileStyleHighlightPattern('\s\+$')
+  call FileStyleHighlightPattern('\s\+$')
 endfunction
 
 
 "Checking file dependenly on settings
 function FileStyleCheck()
-    call clearmatches()
-    call FileStyleExpandtabCheck()
-    call FileStyleTrailingSpaces()
+  call clearmatches()
+  call FileStyleExpandtabCheck()
+  call FileStyleTrailingSpaces()
 endfunction
 
