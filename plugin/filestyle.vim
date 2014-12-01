@@ -37,7 +37,7 @@ function FileStyleExpandtabCheck()
   if &expandtab
     let l:search_pattern = '\t\+'
   else
-    let l:search_pattern = '^ \+'
+    let l:search_pattern = '^\t* \+'
   endif
   call FileStyleHighlightPattern(l:search_pattern)
 endfunction
