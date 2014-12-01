@@ -21,7 +21,7 @@ if !exists('g:filestyle_plugin')
   "Defining auto commands
   augroup file_style_auto_commands
     autocmd!
-    autocmd BufReadPost * call FileStyleCheck()
+    autocmd BufReadPost,BufNewFile * call FileStyleCheck()
   augroup end
 endif
 
