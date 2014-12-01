@@ -21,7 +21,7 @@ if !exists('g:filestyle_plugin')
   "Defining auto commands
   augroup file_style_auto_commands
     autocmd!
-    autocmd BufReadPost,BufNewFile * call FileStyleCheck()
+    autocmd BufReadPost,BufNewFile,FileType  * call FileStyleCheck()
   augroup end
 endif
 
@@ -52,6 +52,13 @@ endfunction
 "Checking file dependenly on settings
 function FileStyleCheck()
   call clearmatches()
+
+  "Avoid checking of help files
+  "TODO: Find better solution than subscribing the FileType event
+  if &filetype=='help'
+    return
+  endif
+
   call FileStyleExpandtabCheck()
   call FileStyleTrailingSpaces()
 endfunction
