@@ -8,9 +8,8 @@ Installation
 
 Installation with Pathogen (recommended):
 
->$ cd ~/.vim/bundle
-
->$ git clone https://github.com/aserebryakov/filestyle.git
+    $ cd ~/.vim/bundle
+    $ git clone https://github.com/aserebryakov/filestyle.git
 
 If you do not use Pathogen, clone repository and copy the content to
 your '~/.vim/' directory.
@@ -40,7 +39,7 @@ Contribution
 
 Plugin source is available on GitHub by the link:
 
->https://github.com/aserebryakov/filestyle
+    https://github.com/aserebryakov/filestyle
 
 If you want to improve this plugin, just fork the repository.
 
