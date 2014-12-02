@@ -14,14 +14,13 @@ CONTENTS                                                    *FileStyleContents*
 ===============================================================================
 Section 1: Installation                                 *FileStyleInstallation*
 
-    If you use Pathogen (recommended) just clone the repository:
+    Installation with Pathogen (recommended):
 
-        https://github.com/aserebryakov/filestyle
+        $ cd ~/.vim/bundle
+        $ git clone https://github.com/aserebryakov/filestyle.git
 
-    to your <vim_files_path>/bundle/ directory.
-
-    Otherwise, you need to copy files to your <vim_files_path> directory.
-
+    If you do not use Pathogen, clone repository and copy the content to
+    your '~/.vim/' directory.
 
 ===============================================================================
 Section 2: Usage                                               *FileStyleUsage*
@@ -32,7 +31,7 @@ Section 2: Usage                                               *FileStyleUsage*
     Current functionality:
     1. If |expandtab| option is used, then all '\t' characters are highlighted,
        otherwise spaces in begining of the line are highlighted
-    2. Traling spaces are highlighted
+    2. Trailing spaces are highlighted
 
     Commands:
         FileStyleActivate   - enables plugin for current buffer
@@ -72,8 +71,11 @@ Section 4: Contribution                                 *FileStyleContribution*
 Section 5: Changelog                                       *FileStyleChangelog*
 
     Version 0.5.0   Implemented basic functionality:
-                        - highlighting of trailing spaces
-                        - highlighting of incorrect indentation
+                    * Highlighting of trailing spaces
+                    * Highlighting of incorrect indentation
+
+    Version 0.5.1   * Added commands to enable/disable plugin
+                    * Several bug fixes
 
 
 ===============================================================================
