@@ -19,11 +19,41 @@ if !exists('g:filestyle_plugin')
   highligh FileStyleError ctermbg=Red guibg=Red
 
   "Defining auto commands
-  augroup file_style_auto_commands
+  augroup filestyle_auto_commands
     autocmd!
-    autocmd BufReadPost,BufNewFile,FileType  * call FileStyleCheck()
+    autocmd BufReadPost,BufNewFile * call FileStyleActivate()
+    autocmd FileType * call FileStyleCheckFiletype()
   augroup end
+
+  "Defining plugin commands
+  command! FileStyleActivate call FileStyleActivate()
+  command! FileStyleDeactivate call FileStyleDeactivate()
+  command! FileStyleCheck call FileStyleCheck()
+
 endif
+
+
+"Turn plugin on
+function FileStyleActivate()
+  let b:filestyle_active = 1
+  call FileStyleCheck()
+endfunction
+
+
+"Turn plugin off
+function FileStyleDeactivate()
+  let b:filestyle_active = 0
+  call clearmatches()
+endfunction
+
+
+"Check filetype to handle specific cases
+function FileStyleCheckFiletype()
+  "Avoid checking of help files
+  if &filetype=='help'
+    call FileStyleDeactivate()
+  endif
+endfunction
 
 
 "Highlighting specified pattern
@@ -52,13 +82,6 @@ endfunction
 "Checking file dependenly on settings
 function FileStyleCheck()
   call clearmatches()
-
-  "Avoid checking of help files
-  "TODO: Find better solution than subscribing the FileType event
-  if &filetype=='help'
-    return
-  endif
-
   call FileStyleExpandtabCheck()
   call FileStyleTrailingSpaces()
 endfunction

@@ -26,13 +26,18 @@ Section 1: Installation                                 *FileStyleInstallation*
 ===============================================================================
 Section 2: Usage                                               *FileStyleUsage*
 
-    There are no specific usage instructions. Plugin is loaded automatically
-    and checks each opened file to correspond Vim settings.
+    Plugin is loaded automatically and checks each opened file to correspond
+    Vim settings.
 
     Current functionality:
     1. If |expandtab| option is used, then all '\t' characters are highlighted,
        otherwise spaces in begining of the line are highlighted
     2. Traling spaces are highlighted
+
+    Commands:
+        FileStyleActivate   - enables plugin for current buffer
+        FileStyleDeactivate - disables plugin for current buffer
+        FileStyleCheck      - forcely checks current buffer
 
 
 ===============================================================================
