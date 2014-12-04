@@ -23,6 +23,7 @@ if !exists('g:filestyle_plugin')
     autocmd!
     autocmd BufReadPost,BufNewFile * call FileStyleActivate()
     autocmd FileType * call FileStyleCheckFiletype()
+    autocmd WinEnter * call FileStyleCheck()
   augroup end
 
   "Defining plugin commands
@@ -79,10 +80,22 @@ function FileStyleTrailingSpaces()
 endfunction
 
 
+"Checking long lines
+function FileStyleLongLines()
+  if &textwidth > 0
+    let l:pattern = '\%' . (&textwidth+1) . 'v.*'
+    call FileStyleHighlightPattern(l:pattern)
+  endif
+endfunction
+
+
 "Checking file dependenly on settings
 function FileStyleCheck()
-  call clearmatches()
-  call FileStyleExpandtabCheck()
-  call FileStyleTrailingSpaces()
+  if b:filestyle_active == 1
+    call clearmatches()
+    call FileStyleExpandtabCheck()
+    call FileStyleTrailingSpaces()
+    call FileStyleLongLines()
+  endif
 endfunction
 
