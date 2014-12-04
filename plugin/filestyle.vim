@@ -16,7 +16,11 @@
 
 if !exists('g:filestyle_plugin')
   let g:filestyle_plugin = 1
-  highligh FileStyleError ctermbg=Red guibg=Red
+
+  highligh FileStyleTabsError ctermbg=Red guibg=Red
+  highligh FileStyleTrailngSpacesError ctermbg=Cyan guibg=Cyan
+  highligh FileStyleSpacesError ctermbg=Yellow guibg=Yellow
+  highligh FileStyleTooLongLine cterm=inverse gui=inverse
 
   "Defining auto commands
   augroup filestyle_auto_commands
@@ -58,33 +62,38 @@ endfunction
 
 
 "Highlighting specified pattern
-function FileStyleHighlightPattern(pattern)
-  call matchadd('FileStyleError', a:pattern)
+function FileStyleHighlightPattern(highlight)
+  call matchadd(a:highlight['highlight'], a:highlight['pattern'])
 endfunction
 
 
 "Checking expandtab option
 function FileStyleExpandtabCheck()
   if &expandtab
-    let l:search_pattern = '\t\+'
+    let l:highlight = {'highlight' : 'FileStyleTabsError',
+                     \ 'pattern': '\t\+'}
   else
-    let l:search_pattern = '^\t* \+'
+    let l:highlight = {'highlight' : 'FileStyleSpacesError',
+                     \ 'pattern': '^\t* \+'}
   endif
-  call FileStyleHighlightPattern(l:search_pattern)
+  call FileStyleHighlightPattern(l:highlight)
 endfunction
 
 
 "Checking trailing spaces
 function FileStyleTrailingSpaces()
-  call FileStyleHighlightPattern('\s\+$')
+    let l:highlight = {'highlight' : 'FileStyleTrailngSpacesError',
+                     \ 'pattern': '\s\+$'}
+  call FileStyleHighlightPattern(l:highlight)
 endfunction
 
 
 "Checking long lines
 function FileStyleLongLines()
   if &textwidth > 0
-    let l:pattern = '\%' . (&textwidth+1) . 'v.*'
-    call FileStyleHighlightPattern(l:pattern)
+    let l:highlight = {'highlight' : 'FileStyleTooLongLine',
+                     \ 'pattern': '\%' . (&textwidth+1) . 'v.*' }
+    call FileStyleHighlightPattern(l:highlight)
   endif
 endfunction
 
