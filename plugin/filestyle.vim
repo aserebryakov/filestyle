@@ -23,6 +23,7 @@ if !exists('g:filestyle_plugin')
     autocmd!
     autocmd BufReadPost,BufNewFile * call FileStyleActivate()
     autocmd FileType * call FileStyleCheckFiletype()
+    autocmd WinEnter * call FileStyleCheck()
   augroup end
 
   "Defining plugin commands
@@ -90,9 +91,11 @@ endfunction
 
 "Checking file dependenly on settings
 function FileStyleCheck()
-  call clearmatches()
-  call FileStyleExpandtabCheck()
-  call FileStyleTrailingSpaces()
-  call FileStyleLongLines()
+  if b:filestyle_active == 1
+    call clearmatches()
+    call FileStyleExpandtabCheck()
+    call FileStyleTrailingSpaces()
+    call FileStyleLongLines()
+  endif
 endfunction
 
