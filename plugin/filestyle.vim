@@ -74,7 +74,7 @@ function FileStyleExpandtabCheck()
                      \ 'pattern': '\t\+'}
   else
     let l:highlight = {'highlight' : 'FileStyleSpacesError',
-                     \ 'pattern': '^\t \+'}
+                     \ 'pattern': '^\t* \+'}
   endif
   call FileStyleHighlightPattern(l:highlight)
 endfunction
