@@ -23,7 +23,7 @@ Vim settings.
 
 Current functionality:
 
-1. If `expandtab` option is used, then all '\t' characters are highlighted (RED),
+1. If `expandtab` option is used, then all `\t` characters are highlighted (RED),
    otherwise spaces in begining of the line are highlighted (YELLOW)
 2. Trailing spaces are highlighted (CYAN)
 3. Line parts, that are longer than vaule of |textwidth| (if it was set)
