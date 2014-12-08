@@ -31,9 +31,9 @@ Current functionality:
 
 Commands:
 
-  * `FileStyleActivate`   - enables plugin for current buffer
-  * `FileStyleDeactivate` - disables plugin for current buffer
-  * `FileStyleCheck`      - forcely checks current buffer
+  * `FileStyleActivate`   - enable plugin for current buffer
+  * `FileStyleDeactivate` - disable plugin for current buffer
+  * `FileStyleCheck`      - check current buffer
 
 
 Contribution
