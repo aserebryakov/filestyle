@@ -31,9 +31,9 @@ Current functionality:
 
 Commands:
 
-  * `FileStyleActivate`   - enables plugin for current buffer
-  * `FileStyleDeactivate` - disables plugin for current buffer
-  * `FileStyleCheck`      - forcely checks current buffer
+  * `FileStyleActivate`   - enable plugin for current buffer
+  * `FileStyleDeactivate` - disable plugin for current buffer
+  * `FileStyleCheck`      - check current buffer
 
 
 Contribution
@@ -58,5 +58,5 @@ Changelog
 
 * Added commands to enable/disable plugin
 * Several bug fixes
-* Added separated highlighing for different cases
+* Added separated highlighting for different cases
 
