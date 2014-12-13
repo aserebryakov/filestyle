@@ -60,3 +60,7 @@ Changelog
 * Several bug fixes
 * Added separated highlighting for different cases
 
+0.5.2
+
+* Fixed the `undefined variable filestyle_active` error
+

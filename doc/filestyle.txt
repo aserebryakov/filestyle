@@ -80,6 +80,8 @@ Section 5: Changelog                                       *FileStyleChangelog*
                     * Several bug fixes
                     * Added separated highlighting for different cases
 
+    Version 0.5.2   * Fixed the `undefined variable filestyle_active` error
+
 ===============================================================================
 Section 6: Credits                                           *FileStyleCredits*
 
