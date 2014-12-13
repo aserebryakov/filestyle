@@ -100,7 +100,7 @@ endfunction
 
 "Checking file dependenly on settings
 function FileStyleCheck()
-  if b:filestyle_active == 1
+  if get(b:, "filestyle_active", 0) == 1
     call clearmatches()
     call FileStyleExpandtabCheck()
     call FileStyleTrailingSpaces()
