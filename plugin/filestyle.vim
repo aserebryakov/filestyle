@@ -38,17 +38,26 @@ if !exists('g:filestyle_plugin')
 endif
 
 
-"Turn plugin on
+"Turn plugin on for a current buffer
 function FileStyleActivate()
   let b:filestyle_active = 1
   call FileStyleCheck()
 endfunction
 
 
-"Turn plugin off
+"Turn plugin off for a current buffer
 function FileStyleDeactivate()
   let b:filestyle_active = 0
-  call clearmatches()
+  let l:filename = expand('%:p')
+  windo call FileStyleClearFile(l:filename)
+endfunction
+
+
+"Clear matches if name of the file is the same as given
+function FileStyleClearFile(filename)
+  if a:filename == expand('%:p')
+    call clearmatches()
+  endif
 endfunction
 
 
