@@ -33,7 +33,7 @@ if !exists('g:filestyle_plugin')
   augroup filestyle_auto_commands
     autocmd!
     autocmd FileType * call FileStyleCheckFiletype()
-    autocmd VimEnter * call FileStyleActivate()
+    autocmd BufReadPost,BufNew,VimEnter * call FileStyleActivate()
     autocmd WinEnter * call FileStyleCheck()
   augroup end
 
