@@ -32,8 +32,8 @@ if !exists('g:filestyle_plugin')
   "Defining auto commands
   augroup filestyle_auto_commands
     autocmd!
-    autocmd BufReadPost,BufNewFile * call FileStyleActivate()
     autocmd FileType * call FileStyleCheckFiletype()
+    autocmd VimEnter * call FileStyleActivate()
     autocmd WinEnter * call FileStyleCheck()
   augroup end
 
@@ -48,6 +48,7 @@ endif
 "Turn plugin on for a current buffer
 function FileStyleActivate()
   let b:filestyle_active = 1
+  call FileStyleCheckFiletype()
   call FileStyleCheck()
 endfunction
 
