@@ -16,6 +16,13 @@
 
 if !exists('g:filestyle_plugin')
   let g:filestyle_plugin = 1
+  let g:filestyle_ignore_default = ['help', 'nerdtree']
+
+  if !exists('g:filestyle_ignore')
+    let g:filestyle_ignore = g:filestyle_ignore_default
+  else
+    let g:filestyle_ignore += g:filestyle_ignore_default
+  endif
 
   highligh FileStyleTabsError ctermbg=Red guibg=Red
   highligh FileStyleTrailngSpacesError ctermbg=Cyan guibg=Cyan
@@ -50,6 +57,9 @@ function FileStyleDeactivate()
   let b:filestyle_active = 0
   let l:filename = expand('%:p')
   windo call FileStyleClearFile(l:filename)
+
+  "Moving to the first window after windo
+  wincmd w
 endfunction
 
 
@@ -63,8 +73,8 @@ endfunction
 
 "Check filetype to handle specific cases
 function FileStyleCheckFiletype()
-  "Avoid checking of help files
-  if &filetype=='help'
+  "Disable checking of the files in black list
+  if index(g:filestyle_ignore, &filetype) != -1
     call FileStyleDeactivate()
   endif
 endfunction
