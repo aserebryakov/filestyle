@@ -35,6 +35,11 @@ Commands:
   * `FileStyleDeactivate` - disable plugin for current buffer
   * `FileStyleCheck`      - check current buffer
 
+In order to configure file types to be ingored by a plugin, add the
+following line to your `.vimrc` file:
+
+    let g:filestyle_ignore = ['text']
+
 
 Contribution
 ------------
@@ -64,3 +69,7 @@ Changelog
 
 * Fixed the `undefined variable filestyle_active` error
 
+0.6.0
+
+* Configurable list of ignored file types
+* Plugin turns off in all windows with current buffer opened
