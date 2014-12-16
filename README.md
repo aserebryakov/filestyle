@@ -28,6 +28,7 @@ Current functionality:
 2. Trailing spaces are highlighted (CYAN)
 3. Line parts, that are longer than vaule of `textwidth` (if it was set)
    are highlighed (INVERT)
+4. Control characters are highlighted (BLUE)
 
 Commands:
 
@@ -73,3 +74,4 @@ Changelog
 
 * Configurable list of ignored file types
 * Plugin turns off in all windows with current buffer opened
+* Added highlighting of control characters

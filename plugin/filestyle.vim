@@ -27,6 +27,7 @@ if !exists('g:filestyle_plugin')
   highligh FileStyleTabsError ctermbg=Red guibg=Red
   highligh FileStyleTrailngSpacesError ctermbg=Cyan guibg=Cyan
   highligh FileStyleSpacesError ctermbg=Yellow guibg=Yellow
+  highligh FileStyleControlCharacter ctermbg=Blue guibg=Blue
   highligh FileStyleTooLongLine cterm=inverse gui=inverse
 
   "Defining auto commands
@@ -118,6 +119,14 @@ function FileStyleLongLines()
 endfunction
 
 
+"Checking control characters
+function FileStyleControlCharacters()
+  let l:highlight = {'highlight' : 'FileStyleControlCharacter',
+                     \ 'pattern': '[\x00-\x08\x0a-\x1f]'}
+  call FileStyleHighlightPattern(l:highlight)
+endfunction
+
+
 "Checking file dependenly on settings
 function FileStyleCheck()
   if get(b:, 'filestyle_active', 0) == 1
@@ -125,6 +134,7 @@ function FileStyleCheck()
     call FileStyleExpandtabCheck()
     call FileStyleTrailingSpaces()
     call FileStyleLongLines()
+    call FileStyleControlCharacters()
   endif
 endfunction
 
