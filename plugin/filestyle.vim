@@ -122,7 +122,7 @@ endfunction!
 "Checking control characters
 function! FileStyleControlCharacters()
   let l:highlight = {'highlight' : 'FileStyleControlCharacter',
-                     \ 'pattern': '[\x00-\x08\x0a-\x1f]'}
+                   \ 'pattern': '[\x00-\x08\x0a-\x1f]'}
   call FileStyleHighlightPattern(l:highlight)
 endfunction!
 
@@ -138,3 +138,28 @@ function! FileStyleCheck()
   endif
 endfunction!
 
+
+"Fix trailing spaces
+function FileStyleTrailngSpacesFix()
+  execute '%s/\s\+$//'
+endfunction
+
+
+"Fix trailing spaces
+function FileStyleExpandtabFix()
+  echo 'FileStyleExpandtabFix'
+  if &expandtab
+    %retab
+  else
+    %retab!
+  endif
+endfunction
+
+
+"Fix filestyle errors
+function FileStyleFix()
+  call FileStyleTrailngSpacesFix()
+  call FileStyleExpandtabFix()
+  "call FileStyleTooLongLineFix()
+  "call FileStyleControlCharactersFix()
+endfunction
