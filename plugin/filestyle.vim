@@ -42,6 +42,7 @@ if !exists('g:filestyle_plugin')
   command! FileStyleActivate call FileStyleActivate()
   command! FileStyleDeactivate call FileStyleDeactivate()
   command! FileStyleCheck call FileStyleCheck()
+  command! FileStyleFix call FileStyleFix()
 
 endif
 
@@ -95,7 +96,7 @@ function! FileStyleExpandtabCheck()
                      \ 'pattern': '\t\+'}
   else
     let l:highlight = {'highlight' : 'FileStyleSpacesError',
-                     \ 'pattern': '^\t* \+'}
+                     \ 'pattern' : '^\t* \+'}
   endif
   call FileStyleHighlightPattern(l:highlight)
 endfunction!
@@ -139,20 +140,26 @@ function! FileStyleCheck()
 endfunction!
 
 
-"Fix trailing spaces
+"Remove trailing spaces
 function FileStyleTrailngSpacesFix()
   execute '%s/\s\+$//'
 endfunction
 
 
-"Fix trailing spaces
+"Fix indentations
 function FileStyleExpandtabFix()
-  echo 'FileStyleExpandtabFix'
   if &expandtab
     %retab
   else
-    %retab!
+    "Command retab! is not used because it may replace
+    "correct spaces with tabs
   endif
+endfunction
+
+
+"Remove control characters
+function FileStyleControlCharactersFix()
+  execute '%s/[\x00-\x08\x0a-\x1f]//g'
 endfunction
 
 
@@ -161,5 +168,5 @@ function FileStyleFix()
   call FileStyleTrailngSpacesFix()
   call FileStyleExpandtabFix()
   "call FileStyleTooLongLineFix()
-  "call FileStyleControlCharactersFix()
+  call FileStyleControlCharactersFix()
 endfunction
