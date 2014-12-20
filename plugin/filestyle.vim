@@ -47,49 +47,49 @@ endif
 
 
 "Turn plugin on for a current buffer
-function FileStyleActivate()
+function! FileStyleActivate()
   let b:filestyle_active = 1
   call FileStyleCheckFiletype()
   call FileStyleCheck()
-endfunction
+endfunction!
 
 
 "Turn plugin off for a current buffer
-function FileStyleDeactivate()
+function! FileStyleDeactivate()
   let b:filestyle_active = 0
   let l:filename = expand('%:p')
   windo call FileStyleClearFile(l:filename)
 
   "Moving to the first window after windo
   wincmd w
-endfunction
+endfunction!
 
 
 "Clear matches if name of the file is the same as given
-function FileStyleClearFile(filename)
+function! FileStyleClearFile(filename)
   if a:filename == expand('%:p')
     call clearmatches()
   endif
-endfunction
+endfunction!
 
 
 "Check filetype to handle specific cases
-function FileStyleCheckFiletype()
+function! FileStyleCheckFiletype()
   "Disable checking of the files in black list
   if index(g:filestyle_ignore, &filetype) != -1
     call FileStyleDeactivate()
   endif
-endfunction
+endfunction!
 
 
 "Highlighting specified pattern
-function FileStyleHighlightPattern(highlight)
+function! FileStyleHighlightPattern(highlight)
   call matchadd(a:highlight['highlight'], a:highlight['pattern'])
-endfunction
+endfunction!
 
 
 "Checking expandtab option
-function FileStyleExpandtabCheck()
+function! FileStyleExpandtabCheck()
   if &expandtab
     let l:highlight = {'highlight' : 'FileStyleTabsError',
                      \ 'pattern': '\t\+'}
@@ -98,37 +98,37 @@ function FileStyleExpandtabCheck()
                      \ 'pattern': '^\t* \+'}
   endif
   call FileStyleHighlightPattern(l:highlight)
-endfunction
+endfunction!
 
 
 "Checking trailing spaces
-function FileStyleTrailingSpaces()
+function! FileStyleTrailingSpaces()
     let l:highlight = {'highlight' : 'FileStyleTrailngSpacesError',
                      \ 'pattern': '\s\+$'}
   call FileStyleHighlightPattern(l:highlight)
-endfunction
+endfunction!
 
 
 "Checking long lines
-function FileStyleLongLines()
+function! FileStyleLongLines()
   if &textwidth > 0
     let l:highlight = {'highlight' : 'FileStyleTooLongLine',
                      \ 'pattern': '\%' . (&textwidth+1) . 'v.*' }
     call FileStyleHighlightPattern(l:highlight)
   endif
-endfunction
+endfunction!
 
 
 "Checking control characters
-function FileStyleControlCharacters()
+function! FileStyleControlCharacters()
   let l:highlight = {'highlight' : 'FileStyleControlCharacter',
                      \ 'pattern': '[\x00-\x08\x0a-\x1f]'}
   call FileStyleHighlightPattern(l:highlight)
-endfunction
+endfunction!
 
 
 "Checking file dependenly on settings
-function FileStyleCheck()
+function! FileStyleCheck()
   if get(b:, 'filestyle_active', 0) == 1
     call clearmatches()
     call FileStyleExpandtabCheck()
@@ -136,5 +136,5 @@ function FileStyleCheck()
     call FileStyleLongLines()
     call FileStyleControlCharacters()
   endif
-endfunction
+endfunction!
 
