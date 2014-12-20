@@ -75,3 +75,7 @@ Changelog
 * Configurable list of ignored file types
 * Plugin turns off in all windows with current buffer opened
 * Added highlighting of control characters
+
+0.6.1
+
+* Fixed compatibility with other plugins when Vundle is used

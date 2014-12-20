@@ -92,6 +92,9 @@ Section 5: Changelog                                       *FileStyleChangelog*
                     * Plugin turns off in all windows with current buffer
                       opened
 
+    Version 0.6.1   * Fixed compatibility with other plugins when Vundle
+                      is used
+
 ===============================================================================
 Section 6: Credits                                           *FileStyleCredits*
 
