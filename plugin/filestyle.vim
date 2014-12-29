@@ -141,25 +141,24 @@ endfunction!
 
 
 "Remove trailing spaces
-function FileStyleTrailngSpacesFix()
+function! FileStyleTrailngSpacesFix()
   silent! execute '%s/\s\+$//'
-endfunction
+endfunction!
 
 
 "Function iterating over entire buffer and processing each
 "line with a given function
-function FileStyleDoForEachLine(function)
+function! FileStyleDoForEachLine(function)
   for l:i in range(line('$'))
     let l:line = getline(l:i)
     let l:result_line = call(a:function, [l:line])
     call setline(l:i, l:result_line)
   endfor
-
-endfunction
+endfunction!
 
 
 "Function replacing spaces with tabs
-function FileStyleFixIndent(line)
+function! FileStyleFixIndent(line)
   let l:indent_len = 0
   for l:i in range(strlen(a:line))
     if a:line[l:i] == " "
@@ -179,11 +178,11 @@ function FileStyleFixIndent(line)
   endfor
 
   return (l:indent_string . substitute(a:line, '^\s\+', '', ''))
-endfunction
+endfunction!
 
 
 "Fix indentations
-function FileStyleExpandtabFix()
+function! FileStyleExpandtabFix()
   if &expandtab
     %retab
   else
@@ -191,18 +190,19 @@ function FileStyleExpandtabFix()
     "correct spaces with tabs
     call FileStyleDoForEachLine('FileStyleFixIndent')
   endif
-endfunction
+endfunction!
 
 
 "Remove control characters
-function FileStyleControlCharactersFix()
+function! FileStyleControlCharactersFix()
   silent! execute '%s/[\x00-\x08\x0a-\x1f]//g'
-endfunction
+endfunction!
 
 
 "Fix filestyle errors
-function FileStyleFix()
+function! FileStyleFix()
   call FileStyleControlCharactersFix()
   call FileStyleTrailngSpacesFix()
   call FileStyleExpandtabFix()
-endfunction
+endfunction!
+
