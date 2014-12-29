@@ -28,7 +28,13 @@ Section 2: Usage                                               *FileStyleUsage*
     Plugin is loaded automatically and checks each opened file to correspond
     Vim settings.
 
-    Current functionality:
+    Commands:
+        FileStyleActivate   - enable plugin for current buffer
+        FileStyleDeactivate - disable plugin for current buffer
+        FileStyleCheck      - check current buffer
+        FileStyleFix        - fix style errors
+
+    Highlighting rules:
     1. If |expandtab| option is used, then all '\t' characters are highlighted
        (RED), otherwise spaces in begining of the line are highlighted (YELLOW)
     2. Trailing spaces are highlighted (CYAN)
@@ -36,10 +42,12 @@ Section 2: Usage                                               *FileStyleUsage*
        are highlighed (INVERT)
     4. Control characters are highlighted (BLUE)
 
-    Commands:
-        FileStyleActivate   - enable plugin for current buffer
-        FileStyleDeactivate - disable plugin for current buffer
-        FileStyleCheck      - check current buffer
+    FileStyleFix rules:
+    1. Control characters are removed
+    2. Trailing spaces are removed
+    3. If |expandtab| option is used, then all '\t' characters are replaced
+       with spaces, otherwise spaces in begining of the line are replaced by
+       '\t'
 
     In order to configure file types to be ingored by a plugin, add the
     following line to your '.vimrc' file:
@@ -94,6 +102,8 @@ Section 5: Changelog                                       *FileStyleChangelog*
 
     Version 0.6.1   * Fixed compatibility with other plugins when Vundle
                       is used
+
+    Version 0.7.0   * Implemented style errors fixing (experimental)
 
 ===============================================================================
 Section 6: Credits                                           *FileStyleCredits*
