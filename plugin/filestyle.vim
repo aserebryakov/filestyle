@@ -114,7 +114,7 @@ endfunction!
 function! FileStyleLongLines()
   if &textwidth > 0
     let l:highlight = {'highlight' : 'FileStyleTooLongLine',
-                     \ 'pattern': '\%' . (&textwidth+1) . 'v.*' }
+                     \ 'pattern': '\%>' . &textwidth . 'v.\+' }
     call FileStyleHighlightPattern(l:highlight)
   endif
 endfunction!
