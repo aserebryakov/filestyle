@@ -16,6 +16,7 @@
 
 if !exists('g:filestyle_plugin')
   let g:filestyle_plugin = 1
+  let g:filestyle_enabled = 1
   let g:filestyle_ignore_default = ['help', 'nerdtree']
 
   if !exists('g:filestyle_ignore')
@@ -38,6 +39,8 @@ if !exists('g:filestyle_plugin')
   augroup end
 
   "Defining plugin commands
+  command! FileStyleEnable call FileStyleEnable()
+  command! FileStyleDisable call FileStyleDisable()
   command! FileStyleActivate call FileStyleActivate()
   command! FileStyleDeactivate call FileStyleDeactivate()
   command! FileStyleCheck call FileStyleCheck()
@@ -129,13 +132,19 @@ endfunction!
 
 "Checking file dependenly on settings
 function! FileStyleCheck()
-  if get(b:, 'filestyle_active', 0) == 1
-    call clearmatches()
-    call FileStyleExpandtabCheck()
-    call FileStyleTrailingSpaces()
-    call FileStyleLongLines()
-    call FileStyleControlCharacters()
+  if get(g:, 'filestyle_enabled', 0) == 0
+    return
   endif
+
+  if get(b:, 'filestyle_active', 0) == 0
+    return
+  endif
+
+  call clearmatches()
+  call FileStyleExpandtabCheck()
+  call FileStyleTrailingSpaces()
+  call FileStyleLongLines()
+  call FileStyleControlCharacters()
 endfunction!
 
 
@@ -205,3 +214,18 @@ function! FileStyleFix()
   call FileStyleExpandtabFix()
 endfunction!
 
+
+"Enable plugin globally
+function! FileStyleEnable()
+  let g:filestyle_enabled = 1
+  windo call FileStyleActivate()
+  wincmd w
+endfunction!
+
+
+"Disable plugin globally
+function! FileStyleDisable()
+  let g:filestyle_enabled = 0
+  windo call clearmatches()
+  wincmd w
+endfunction!

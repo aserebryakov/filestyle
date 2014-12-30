@@ -29,6 +29,8 @@ Section 2: Usage                                               *FileStyleUsage*
     Vim settings.
 
     Commands:
+        FileStyleEnable     - enable plugin globally
+        FileStyleDisable    - disable plugin globally
         FileStyleActivate   - enable plugin for current buffer
         FileStyleDeactivate - disable plugin for current buffer
         FileStyleCheck      - check current buffer
@@ -104,6 +106,7 @@ Section 5: Changelog                                       *FileStyleChangelog*
                       is used
 
     Version 0.7.0   * Implemented style errors fixing (experimental)
+                    * Commands enabling/disabling plugin globally were added
 
 ===============================================================================
 Section 6: Credits                                           *FileStyleCredits*

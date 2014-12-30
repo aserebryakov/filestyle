@@ -23,6 +23,8 @@ Vim settings.
 
 Commands:
 
+  * `FileStyleEnable`     - enable plugin globally
+  * `FileStyleDisable`    - disable plugin globally
   * `FileStyleActivate`   - enable plugin for current buffer
   * `FileStyleDeactivate` - disable plugin for current buffer
   * `FileStyleCheck`      - check current buffer
@@ -92,3 +94,4 @@ Changelog
 0.7.0
 
 * Implemented style errors fixing (experimental)
+* Commands enabling/disabling plugin globally were added
