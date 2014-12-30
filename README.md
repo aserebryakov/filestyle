@@ -95,3 +95,6 @@ Changelog
 
 * Implemented style errors fixing (experimental)
 * Commands enabling/disabling plugin globally were added
+* Highlighting of the EOL fixed
+* Issue with plugin disabling for specific buffer fixed
+
