@@ -1,27 +1,45 @@
 filestyle
 =========
 
-Plugin checking text to correspond current Vim settings.
+**filestyle** is a Vim plugin that highlights whitespace that violates your
+buffer settings. This includes:
+
+* Trailing spaces
+* Tabs or spaces depending on `|expandtab|`
+* Lines longer than `|textwidth|`
+* Control characters
+
+**filestyle** also lets you fix these violations (experimental).
+
+### Examples
+
+![Example 1](https://cloud.githubusercontent.com/assets/985977/7272222/9809dbec-e8e9-11e4-8a43-47e0374ccbe0.png)
+
+![Example 2](https://cloud.githubusercontent.com/assets/985977/7272223/980cb506-e8e9-11e4-8b3e-418506344c6b.png)
+
+![Example 3](https://cloud.githubusercontent.com/assets/985977/7272224/98100864-e8e9-11e4-9e09-45b217125bcb.png)
 
 Installation
 ------------
 
-Installation with Pathogen (recommended):
+##### Pathogen
 
-    $ cd ~/.vim/bundle
-    $ git clone https://github.com/aserebryakov/filestyle.git
+    $ cd ~/.vim/bundle $ git clone https://github.com/aserebryakov/filestyle.git
 
-If you do not use Pathogen, clone repository and copy the content to
-your '~/.vim/' directory.
+##### NeoBundle
 
+    NeoBundle 'aserebryakov/filestyle'
+
+##### Without plugin manager
+
+Clone this repository and copy the content to your `~/.vim/` directory.
 
 Usage
 -----
 
-Plugin is loaded automatically and checks each opened file to correspond
-Vim settings.
+**filestyle** automatically checks each opened file.
 
-Commands:
+##### Commands
 
   * `FileStyleEnable`     - enable plugin globally
   * `FileStyleDisable`    - disable plugin globally
@@ -30,71 +48,66 @@ Commands:
   * `FileStyleCheck`      - check current buffer
   * `FileStyleFix`        - fix style errors
 
-Highlighting rules:
+##### Highlighting rules
 
-1. If |expandtab| option is used, then all '\t' characters are highlighted
-   (RED), otherwise spaces in begining of the line are highlighted (YELLOW)
-1. Trailing spaces are highlighted (CYAN)
-1. Line parts, that are longer than vaule of |textwidth| (if it was set)
-   are highlighed (INVERT)
-1. Control characters are highlighted (BLUE)
+1. If `|expandtab|` is set, highlight tabs (RED), if not, highlight spaces at
+the beginning of a line (YELLOW).
+1. Highlight trailing spaces (CYAN)
+1. Highlight line parts that exceed `|textwidth|` (INVERT)
+1. Highlight control characters (BLUE)
 
-FileStyleFix rules:
+##### FileStyleFix rules
 
-1. Control characters are removed
-1. Trailing spaces are removed
-1. If |expandtab| option is used, then all '\t' characters are replaced
-   with spaces, otherwise spaces in begining of the line are replaced by '\t'
+1. Remove control characters
+1. Remove trailing spaces
+1. If `|expandtab|` is set, replace tabs with spaces, if not, replace spaces at
+the beginning of a line with tabs
 
+##### Ignore file types
 
-In order to configure file types to be ingored by a plugin, add the
-following line to your `.vimrc` file:
+By default, **filestyle** checks all file types. To ignore a file type, for
+example `text`, add the following line to your `.vimrc`:
 
     let g:filestyle_ignore = ['text']
-
 
 Contribution
 ------------
 
-Plugin source is available on GitHub by the link:
+Source code and issues of the plugin are hosted on GitHub:
 
     https://github.com/aserebryakov/filestyle
-
-If you want to improve this plugin, just fork the repository.
-
 
 Changelog
 ---------
 
-0.5.0 Implemented basic functionality:
+#### 0.7.0
 
-* Highlighting of trailing spaces
-* Highlighting of incorrect indentation
+* Implemented style errors fixing (experimental)
+* Added commands to enable/disable the plugin globally
+* Fixed highlighting of the EOL
+* Fixed disabling the plugin for specific buffers
 
-0.5.1
-
-* Added commands to enable/disable plugin
-* Several bug fixes
-* Added separated highlighting for different cases
-
-0.5.2
-
-* Fixed the `undefined variable filestyle_active` error
-
-0.6.0
-
-* Configurable list of ignored file types
-* Plugin turns off in all windows with current buffer opened
-* Added highlighting of control characters
-
-0.6.1
+#### 0.6.1
 
 * Fixed compatibility with other plugins when Vundle is used
 
-0.7.0
+#### 0.6.0
 
-* Implemented style errors fixing (experimental)
-* Commands enabling/disabling plugin globally were added
-* Highlighting of the EOL fixed
-* Issue with plugin disabling for specific buffer fixed
+* Added option to ignore certain file types
+* Plugin turns off in all windows with current buffer opened (?)
+* Added highlighting of control characters
 
+#### 0.5.2
+
+* Fixed the `undefined variable filestyle_active` error
+
+#### 0.5.1
+
+* Added commands to enable/disable the plugin
+* Fixed several bugs
+* Added separated highlighting for different cases (?)
+
+#### 0.5.0
+
+* Added highlighting of trailing spaces
+* Added highlighting of incorrect indentation
