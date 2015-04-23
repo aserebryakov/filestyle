@@ -94,7 +94,8 @@ Changelog
 #### 0.6.0
 
 * Added option to ignore certain file types
-* Plugin turns off in all windows with current buffer opened (?)
+* Highlighting is turned off in all windows where current buffer opened when
+ `FileStyleDeactivate` is called
 * Added highlighting of control characters
 
 #### 0.5.2
@@ -105,7 +106,7 @@ Changelog
 
 * Added commands to enable/disable the plugin
 * Fixed several bugs
-* Added separated highlighting for different cases (?)
+* Different violations of buffer settings are highlighted with a different colors
 
 #### 0.5.0
 
