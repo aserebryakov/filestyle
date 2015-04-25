@@ -31,7 +31,7 @@ if !exists('g:filestyle_plugin')
   highligh FileStyleSpacesError ctermbg=Yellow guibg=Yellow
   highligh FileStyleControlCharacter ctermbg=Blue guibg=Blue
   highligh FileStyleTooLongLine cterm=inverse gui=inverse
-  highligh FileStyleIgnoredPattern term=NONE cterm=NONE gui=NONE
+  highligh FileStyleIgnoredPattern guibg=bg gui=NONE
 
   "Defining auto commands
   augroup filestyle_auto_commands
