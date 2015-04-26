@@ -21,6 +21,7 @@ function! FileStyleCreateHighlightGroups()
   highligh FileStyleSpacesError ctermbg=Yellow guibg=Yellow
   highligh FileStyleControlCharacter ctermbg=Blue guibg=Blue
   highligh FileStyleTooLongLine cterm=inverse gui=inverse
+  highligh FileStyleIgnoredPattern guibg=bg gui=NONE
 endfunction!
 
 
@@ -62,7 +63,15 @@ endfunction!
 
 "Highlighting specified pattern
 function! FileStyleHighlightPattern(highlight)
-  call matchadd(a:highlight['highlight'], a:highlight['pattern'])
+  if has_key(a:highlight, 'priority')
+      let l:priority = a:highlight['priority']
+  else
+      let l:priority = g:filestyle_default_match_priority
+  endif
+
+  call matchadd(a:highlight['highlight'],
+              \ a:highlight['pattern'],
+              \ l:priority)
 endfunction!
 
 
@@ -105,6 +114,19 @@ function! FileStyleControlCharacters()
 endfunction!
 
 
+"Clearing ignored patterns
+function! FileStyleClearIgnoredPatters()
+  if exists('g:filestyle_ignore_patterns')
+      for pattern in g:filestyle_ignore_patterns
+          let l:highlight = {'highlight' : 'FileStyleIgnoredPattern',
+                           \ 'pattern': pattern,
+                           \ 'priority': 10}
+          call FileStyleHighlightPattern(l:highlight)
+      endfor
+  endif
+endfunction!
+
+
 "Checking file dependenly on settings
 function! FileStyleCheck()
   if get(g:, 'filestyle_enabled', 0) == 0
@@ -120,6 +142,7 @@ function! FileStyleCheck()
   call FileStyleTrailingSpaces()
   call FileStyleLongLines()
   call FileStyleControlCharacters()
+  call FileStyleClearIgnoredPatters()
 endfunction!
 
 
@@ -210,6 +233,7 @@ endfunction!
 if !exists('g:filestyle_plugin')
   let g:filestyle_plugin = 1
   let g:filestyle_enabled = 1
+  let g:filestyle_default_match_priority = 1
   let g:filestyle_ignore_default = ['help', 'nerdtree']
 
   if !exists('g:filestyle_ignore')
