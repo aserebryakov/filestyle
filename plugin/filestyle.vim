@@ -14,39 +14,14 @@
 
 "Plugin checking the file to follow Your Vim settings
 
-if !exists('g:filestyle_plugin')
-  let g:filestyle_plugin = 1
-  let g:filestyle_enabled = 1
-  let g:filestyle_ignore_default = ['help', 'nerdtree']
-
-  if !exists('g:filestyle_ignore')
-    let g:filestyle_ignore = g:filestyle_ignore_default
-  else
-    let g:filestyle_ignore += g:filestyle_ignore_default
-  endif
-
+"Create highlight groups
+function! FileStyleCreateHighlightGroups()
   highligh FileStyleTabsError ctermbg=Red guibg=Red
   highligh FileStyleTrailngSpacesError ctermbg=Cyan guibg=Cyan
   highligh FileStyleSpacesError ctermbg=Yellow guibg=Yellow
   highligh FileStyleControlCharacter ctermbg=Blue guibg=Blue
   highligh FileStyleTooLongLine cterm=inverse gui=inverse
-
-  "Defining auto commands
-  augroup filestyle_auto_commands
-    autocmd!
-    autocmd BufReadPost,VimEnter,FileType * call FileStyleActivate()
-    autocmd WinEnter * call FileStyleCheck()
-  augroup end
-
-  "Defining plugin commands
-  command! FileStyleEnable call FileStyleEnable()
-  command! FileStyleDisable call FileStyleDisable()
-  command! FileStyleActivate call FileStyleActivate()
-  command! FileStyleDeactivate call FileStyleDeactivate()
-  command! FileStyleCheck call FileStyleCheck()
-  command! FileStyleFix call FileStyleFix()
-
-endif
+endfunction!
 
 
 "Turn plugin on for a current buffer
@@ -229,3 +204,36 @@ function! FileStyleDisable()
   windo call clearmatches()
   wincmd w
 endfunction!
+
+
+" Plugin startup code
+if !exists('g:filestyle_plugin')
+  let g:filestyle_plugin = 1
+  let g:filestyle_enabled = 1
+  let g:filestyle_ignore_default = ['help', 'nerdtree']
+
+  if !exists('g:filestyle_ignore')
+    let g:filestyle_ignore = g:filestyle_ignore_default
+  else
+    let g:filestyle_ignore += g:filestyle_ignore_default
+  endif
+
+  call FileStyleCreateHighlightGroups()
+
+  "Defining auto commands
+  augroup filestyle_auto_commands
+    autocmd!
+    autocmd BufReadPost,VimEnter,FileType * call FileStyleActivate()
+    autocmd WinEnter * call FileStyleCheck()
+    autocmd ColorScheme * call FileStyleCreateHighlightGroups()
+  augroup end
+
+  "Defining plugin commands
+  command! FileStyleEnable call FileStyleEnable()
+  command! FileStyleDisable call FileStyleDisable()
+  command! FileStyleActivate call FileStyleActivate()
+  command! FileStyleDeactivate call FileStyleDeactivate()
+  command! FileStyleCheck call FileStyleCheck()
+  command! FileStyleFix call FileStyleFix()
+
+endif
