@@ -98,14 +98,16 @@ Section 4: Contribution                                 *FileStyleContribution*
 ===============================================================================
 Section 5: Changelog                                       *FileStyleChangelog*
 
+    Version 0.7.1   * Fixed issue with highlighting after colorscheme change
+
     Version 0.7.0   * Implemented style errors fixing (experimental)
                     * Added commands to enable/disable the plugin globally
                     * Fixed highlighting of the EOL
                     * Fixed disabling the plugin for specific buffers
 
     Version 0.6.0   * Added option to ignore certain file types
-                    * Highlighting is turned off in all windows where current
-                      buffer opened when `FileStyleDeactivate` is called
+                    * Changed `FileStyleDeactivate` to turn off highlighting
+                      in all windows of the current buffer
                     * Added highlighting of control characters
 
     Version 0.6.1   * Fixed compatibility with other plugins when Vundle
@@ -115,8 +117,8 @@ Section 5: Changelog                                       *FileStyleChangelog*
 
     Version 0.5.1   * Added commands to enable/disable the plugin
                     * Fixed several bugs
-                    * Different violations of buffer settings are highlighted
-                      with a different colors
+                    * Changed highlighting to use distinct colors for
+                      different violations of buffer settings
 
     Version 0.5.0   * Added highlighting of trailing spaces
                     * Added highlighting of incorrect indentation
