@@ -80,6 +80,10 @@ Source code and issues of the plugin are hosted on GitHub:
 Changelog
 ---------
 
+#### 0.7.1
+
+* Fixed issue with highlighting after colorscheme change
+
 #### 0.7.0
 
 * Implemented style errors fixing (experimental)
@@ -94,8 +98,8 @@ Changelog
 #### 0.6.0
 
 * Added option to ignore certain file types
-* Highlighting is turned off in all windows where current buffer opened when
- `FileStyleDeactivate` is called
+* Changed `FileStyleDeactivate` to turn off highlighting in all windows of the
+  current buffer
 * Added highlighting of control characters
 
 #### 0.5.2
@@ -106,7 +110,8 @@ Changelog
 
 * Added commands to enable/disable the plugin
 * Fixed several bugs
-* Different violations of buffer settings are highlighted with a different colors
+* Changed highlighting to use distinct colors for different violations of
+  buffer settings
 
 #### 0.5.0
 
