@@ -26,13 +26,11 @@ function! FileStyleCreateIgnoredPatternGroup()
   let l:normal_start = match(l:colors, 'Normal')
   let l:normal_end = match(l:colors, '\n', l:normal_start)
   let l:normal_group = l:colors[(l:normal_start):(l:normal_end)]
-  let l:ctermbg_start = match(l:normal_group, 'ctermbg')
-  let l:ctermbg_end = match(l:normal_group, ' ', l:ctermbg_start)
-  let l:ctermbg = split(l:normal_group[(l:ctermbg_start) : (l:ctermbg_end)],
-                      \ '=')
-  let l:highlight_group = 'highligh FileStyleIgnoredPattern
-                         \ guibg=bg gui=NONE ctermbg='.l:ctermbg[1]
-  execute l:highlight_group
+  let l:ignored_group = substitute(l:normal_group,
+                                 \ 'Normal\s\+xxx',
+                                 \ 'highligh FileStyleIgnoredPattern',
+                                 \ '')
+  execute l:ignored_group
 endfunction!
 
 "Create highlight groups
