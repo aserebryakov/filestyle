@@ -14,6 +14,27 @@
 
 "Plugin checking the file to follow Your Vim settings
 
+
+"Create ignored pattern highlight group
+function! FileStyleCreateIgnoredPatternGroup()
+  let l:colors = ''
+
+  redir => l:colors
+  silent highlight
+  redir END
+
+  let l:normal_start = match(l:colors, 'Normal')
+  let l:normal_end = match(l:colors, '\n', l:normal_start)
+  let l:normal_group = l:colors[(l:normal_start):(l:normal_end)]
+  let l:ctermbg_start = match(l:normal_group, 'ctermbg')
+  let l:ctermbg_end = match(l:normal_group, ' ', l:ctermbg_start)
+  let l:ctermbg = split(l:normal_group[(l:ctermbg_start) : (l:ctermbg_end)],
+                      \ '=')
+  let l:highlight_group = 'highligh FileStyleIgnoredPattern
+                         \ guibg=bg gui=NONE ctermbg='.l:ctermbg[1]
+  execute l:highlight_group
+endfunction!
+
 "Create highlight groups
 function! FileStyleCreateHighlightGroups()
   highligh FileStyleTabsError ctermbg=Red guibg=Red
@@ -22,6 +43,7 @@ function! FileStyleCreateHighlightGroups()
   highligh FileStyleControlCharacter ctermbg=Blue guibg=Blue
   highligh FileStyleTooLongLine cterm=inverse gui=inverse
   highligh FileStyleIgnoredPattern guibg=bg gui=NONE
+  "call FileStyleCreateIgnoredPatternGroup()
 endfunction!
 
 
