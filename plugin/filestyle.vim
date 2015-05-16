@@ -23,9 +23,22 @@ function! FileStyleCreateIgnoredPatternGroup()
   silent highlight
   redir END
 
-  let l:normal_start = match(l:colors, 'Normal')
+  let l:normal_start = match(l:colors, 'Normal\s\+xxx')
+
+  "Normal highlight group should be defined explicitly
+  if (l:normal_start == -1)
+    echom 'FileStyle: Normal highlight group is not found'
+    return
+  endif
+
   let l:normal_end = match(l:colors, '\n', l:normal_start)
   let l:normal_group = l:colors[(l:normal_start):(l:normal_end)]
+
+  if (match(l:normal_group, 'ctermbg=') == -1)
+    echom 'FileStyle: ctermbg parameter should be defined explicitly'
+    return
+  endif
+
   let l:ignored_group = substitute(l:normal_group,
                                  \ 'Normal\s\+xxx',
                                  \ 'highligh FileStyleIgnoredPattern',
@@ -40,8 +53,13 @@ function! FileStyleCreateHighlightGroups()
   highligh FileStyleSpacesError ctermbg=Yellow guibg=Yellow
   highligh FileStyleControlCharacter ctermbg=Blue guibg=Blue
   highligh FileStyleTooLongLine cterm=inverse gui=inverse
-  highligh FileStyleIgnoredPattern guibg=bg gui=NONE
-  "call FileStyleCreateIgnoredPatternGroup()
+
+  if has('gui_running')
+    highligh FileStyleIgnoredPattern guibg=bg gui=NONE
+  else
+    call FileStyleCreateIgnoredPatternGroup()
+  endif
+
 endfunction!
 
 
