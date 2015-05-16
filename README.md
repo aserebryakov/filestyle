@@ -70,6 +70,16 @@ example `text`, add the following line to your `.vimrc`:
 
     let g:filestyle_ignore = ['text']
 
+##### Ignore patterns
+
+**filestyle** allows to specify patterns that should be ignored by the plugin.
+Add the following line to your `.vimrc` to specify ignored patters:
+
+    let g:filestyle_ignore_patterns = ['^>\s\+']
+
+**NOTE:** In case of Vim usage from a terminal, `ctermbg` should be explicitly
+defined in a `Normal` highlight group.
+
 Contribution
 ------------
 
