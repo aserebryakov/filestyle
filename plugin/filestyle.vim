@@ -46,6 +46,7 @@ function! FileStyleCreateIgnoredPatternGroup()
   execute l:ignored_group
 endfunction!
 
+
 "Create highlight groups
 function! FileStyleCreateHighlightGroups()
   highligh FileStyleTabsError ctermbg=Red guibg=Red
@@ -161,6 +162,23 @@ function! FileStyleClearIgnoredPatters()
                            \ 'priority': 10}
           call FileStyleHighlightPattern(l:highlight)
       endfor
+  endif
+endfunction!
+
+
+"Adds trailing spaces to ignored patterns matches list
+function! FileStyleIgnoreTrailingSpaces()
+  let g:filestyle_current_line_match =  matchadd(
+    \ 'FileStyleIgnoredPattern',
+    \ '\%' . line('.') . 'l\s\+$',
+    \ 10)
+endfunction!
+
+
+"Removes trailing spaces from ignored patterns matches list
+function! FileStyleStopIgnoringTrailingSpaces()
+  if exists('g:filestyle_current_line_match')
+    call matchdelete(g:filestyle_current_line_match)
   endif
 endfunction!
 
@@ -288,6 +306,8 @@ if !exists('g:filestyle_plugin')
     autocmd BufReadPost,VimEnter,FileType * call FileStyleActivate()
     autocmd WinEnter * call FileStyleCheck()
     autocmd ColorScheme * call FileStyleCreateHighlightGroups()
+    autocmd InsertEnter * call FileStyleIgnoreTrailingSpaces()
+    autocmd InsertLeave * call FileStyleStopIgnoringTrailingSpaces()
   augroup end
 
   "Defining plugin commands
