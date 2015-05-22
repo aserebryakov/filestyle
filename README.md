@@ -22,6 +22,8 @@ buffer settings. This includes:
 Installation
 ------------
 
+#### Step 1: Install the plugin
+
 ##### Pathogen
 
     $ cd ~/.vim/bundle $ git clone https://github.com/aserebryakov/filestyle.git
@@ -33,6 +35,13 @@ Installation
 ##### Without plugin manager
 
 Clone this repository and copy the content to your `~/.vim/` directory.
+
+#### Step 2: Check your colorscheme (Vim only)
+
+When using Vim (not gVim), `ctermbg` must be explicitly defined in a `Normal`
+highlight group as it is required for the ignore patterns feature. For example:
+
+    hi Normal ctermbg=15
 
 Usage
 -----
@@ -72,13 +81,11 @@ example `text`, add the following line to your `.vimrc`:
 
 ##### Ignore patterns
 
-**filestyle** allows to specify patterns that should be ignored by the plugin.
-Add the following line to your `.vimrc` to specify ignored patters:
+**filestyle** allows you to specify patterns that should be ignored. To ignore a
+pattern, for example quoted lines starting with `>`, add the following line to
+your `.vimrc`:
 
-    let g:filestyle_ignore_patterns = ['^>\s\+']
-
-**NOTE:** In case of Vim usage from a terminal, `ctermbg` should be explicitly
-defined in a `Normal` highlight group.
+    let g:filestyle_ignore_patterns = ['^\(> \?\)\+$']
 
 Contribution
 ------------
@@ -87,8 +94,23 @@ Source code and issues of the plugin are hosted on GitHub:
 
     https://github.com/aserebryakov/filestyle
 
+##### Contributors
+
+* Alexander Serebryako
+ ([GitHub](https://github.com/aserebryakov/),
+ [Stack Overflow](http://stackoverflow.com/users/1132871/alex))
+* Markus Weimar
+ ([GitHub](https://github.com/Markus00000),
+ [Web](http://www.markusweimar.de/en/))
+
 Changelog
 ---------
+
+#### 1.0.0
+
+* Implemented ignored patterns
+* Removed highlighting of trailing spaces in current line when in Insert mode
+* Improved order of highlights
 
 #### 0.7.1
 
