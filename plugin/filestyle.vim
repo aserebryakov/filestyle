@@ -239,10 +239,10 @@ function! FileStyleCheck()
   endif
 
   call clearmatches()
-  call FileStyleExpandtabCheck()
   call FileStyleTrailingSpaces()
-  call FileStyleLongLines()
+  call FileStyleExpandtabCheck()
   call FileStyleControlCharacters()
+  call FileStyleLongLines()
   call FileStyleClearIgnoredPatters()
 endfunction!
 
