@@ -166,19 +166,64 @@ function! FileStyleClearIgnoredPatters()
 endfunction!
 
 
-"Adds trailing spaces to ignored patterns matches list
-function! FileStyleIgnoreTrailingSpaces()
-  let g:filestyle_current_line_match =  matchadd(
-    \ 'FileStyleIgnoredPattern',
-    \ '\%' . line('.') . 'l\s\+$',
-    \ 10)
+"Sets the trailing spaces to be ignored in InsertMode
+function! FileStyleInsertModeEnter()
+
+  "Autocommands handling cursor moving
+  augroup filestyle_auto_commands_insert_mode
+    autocmd!
+    autocmd CursorMovedI * call FileStyleIgnoreTrailingSpaces()
+  augroup end
+
+  call FileStyleIgnoreTrailingSpacesInCurrentLine()
 endfunction!
 
 
-"Removes trailing spaces from ignored patterns matches list
-function! FileStyleStopIgnoringTrailingSpaces()
+"Sets the trailing spaces not to be ignored
+function! FileStyleInsertModeLeave()
+
+  "Clean autocommands before leaving InsertMode
+  augroup filestyle_auto_commands_insert_mode
+    autocmd!
+  augroup end
+
+  "Cleaning up variables
+  call FileStyleNotIgnoreTrailingSpaces()
+  unlet g:filestyle_current_line
+  unlet g:filestyle_current_line_match
+
+endfunction!
+
+
+"Sets the trailing spaces to be ignored in a current line
+function! FileStyleIgnoreTrailingSpacesInCurrentLine()
+    let g:filestyle_current_line = line('.')
+    let g:filestyle_current_line_match =  matchadd(
+        \ 'FileStyleIgnoredPattern',
+        \ '\%' . g:filestyle_current_line . 'l\s\+$',
+        \ 10)
+endfunction!
+
+
+"Removes ignoring trailing spaces from matches list
+function! FileStyleNotIgnoreTrailingSpaces()
   if exists('g:filestyle_current_line_match')
     call matchdelete(g:filestyle_current_line_match)
+  endif
+endfunction!
+
+
+"Sets trailing spaces to be ignored
+function! FileStyleIgnoreTrailingSpaces()
+  if exists('g:filestyle_current_line')
+    if(g:filestyle_current_line != line('.'))
+      call FileStyleNotIgnoreTrailingSpaces()
+      call FileStyleIgnoreTrailingSpacesInCurrentLine()
+    else
+      return
+    endif
+  else
+      call FileStyleIgnoreTrailingSpacesInCurrentLine()
   endif
 endfunction!
 
@@ -285,7 +330,7 @@ function! FileStyleDisable()
 endfunction!
 
 
-" Plugin startup code
+"Plugin startup code
 if !exists('g:filestyle_plugin')
   let g:filestyle_plugin = 1
   let g:filestyle_enabled = 1
@@ -306,8 +351,8 @@ if !exists('g:filestyle_plugin')
     autocmd BufReadPost,VimEnter,FileType * call FileStyleActivate()
     autocmd WinEnter * call FileStyleCheck()
     autocmd ColorScheme * call FileStyleCreateHighlightGroups()
-    autocmd InsertEnter * call FileStyleIgnoreTrailingSpaces()
-    autocmd InsertLeave * call FileStyleStopIgnoringTrailingSpaces()
+    autocmd InsertEnter * call FileStyleInsertModeEnter()
+    autocmd InsertLeave * call FileStyleInsertModeLeave()
   augroup end
 
   "Defining plugin commands
