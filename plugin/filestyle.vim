@@ -41,7 +41,7 @@ function! FileStyleCreateIgnoredPatternGroup()
 
   let l:ignored_group = substitute(l:normal_group,
                                  \ 'Normal\s\+xxx',
-                                 \ 'highligh FileStyleIgnoredPattern',
+                                 \ 'highlight FileStyleIgnoredPattern',
                                  \ '')
   execute l:ignored_group
 endfunction!
@@ -49,14 +49,14 @@ endfunction!
 
 "Create highlight groups
 function! FileStyleCreateHighlightGroups()
-  highligh FileStyleTabsError ctermbg=Red guibg=Red
-  highligh FileStyleTrailngSpacesError ctermbg=Cyan guibg=Cyan
-  highligh FileStyleSpacesError ctermbg=Yellow guibg=Yellow
-  highligh FileStyleControlCharacter ctermbg=Blue guibg=Blue
-  highligh FileStyleTooLongLine cterm=inverse gui=inverse
+  highlight FileStyleTabsError ctermbg=Red guibg=Red
+  highlight FileStyleTrailingSpacesError ctermbg=Cyan guibg=Cyan
+  highlight FileStyleSpacesError ctermbg=Yellow guibg=Yellow
+  highlight FileStyleControlCharacter ctermbg=Blue guibg=Blue
+  highlight FileStyleTooLongLine cterm=inverse gui=inverse
 
   if has('gui_running')
-    highligh FileStyleIgnoredPattern guibg=bg gui=NONE
+    highlight FileStyleIgnoredPattern guibg=bg gui=NONE
   else
     call FileStyleCreateIgnoredPatternGroup()
   endif
@@ -129,7 +129,7 @@ endfunction!
 
 "Checking trailing spaces
 function! FileStyleTrailingSpaces()
-    let l:highlight = {'highlight' : 'FileStyleTrailngSpacesError',
+    let l:highlight = {'highlight' : 'FileStyleTrailingSpacesError',
                      \ 'pattern': '\s\+$'}
   call FileStyleHighlightPattern(l:highlight)
 endfunction!
