@@ -38,8 +38,9 @@ Clone this repository and copy the content to your `~/.vim/` directory.
 
 #### Step 2: Check your colorscheme (Vim only)
 
-When using Vim (not gVim), `ctermbg` must be explicitly defined in a `Normal`
-highlight group as it is required for the ignore patterns feature. For example:
+When using Vim (not gVim), make sure your colorscheme explicitly defines
+`ctermbg` in a `Normal` highlight group as it is required for the ignore
+patterns feature. For example:
 
     hi Normal ctermbg=15
 
@@ -60,7 +61,7 @@ Usage
 ##### Highlighting rules
 
 1. If `|expandtab|` is set, highlight tabs (RED), if not, highlight spaces at
-the beginning of a line (YELLOW).
+   the beginning of a line (YELLOW).
 1. Highlight trailing spaces (CYAN)
 1. Highlight line parts that exceed `|textwidth|` (INVERT)
 1. Highlight control characters (BLUE)
