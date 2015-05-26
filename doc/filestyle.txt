@@ -2,8 +2,8 @@
 
 Highlights unwanted whitespace and characters.
 
-===============================================================================
-CONTENTS                                                    *FileStyleContents*
+==============================================================================
+CONTENTS                                                   *FileStyleContents*
 
     1. Introduction .... |FileStyleIntroduction|
     2. Installation .... |FileStyleInstallation|
@@ -13,8 +13,8 @@ CONTENTS                                                    *FileStyleContents*
     6. Changelog ....... |FileStyleChangelog|
     7. Credits ......... |FileStyleCredits|
 
-===============================================================================
-1. Introduction                                         *FileStyleIntroduction*
+==============================================================================
+1. Introduction                                        *FileStyleIntroduction*
 
 *filestyle* highlights unwanted whitespace and characters.
 
@@ -27,8 +27,8 @@ Highlights include:
 
 filestyle also lets you fix these issues (experimental).
 
-===============================================================================
-2. Installation                                         *FileStyleInstallation*
+==============================================================================
+2. Installation                                        *FileStyleInstallation*
 
 2.1 Install filestyle
 ---------------------
@@ -51,19 +51,21 @@ Without plugin manager:
 -------------------------------------
 
 When using Vim (not gVim), make sure your colorscheme explicitly defines
-|ctermbg| in a |Normal| highlight group as it is required for the ignore patterns
-feature. For example:
+|ctermbg| in a |Normal| highlight group as it is required for the ignore
+patterns feature. For example:
 
     hi Normal ctermbg=15
 
-===============================================================================
-3. Usage                                                       *FileStyleUsage*
+==============================================================================
+3. Usage                                                      *FileStyleUsage*
 
 filestyle automatically checks each opened file.
 
 Commands
 --------
-
+                                        *:FileStyleEnable* *:FileStyleDisable*
+                                   *:FileStyleActivate* *:FileStyleDeactivate*
+                                             *:FileStyleCheck* *:FileStyleFix*
 * `FileStyleEnable`     - enable plugin globally
 * `FileStyleDisable`    - disable plugin globally
 * `FileStyleActivate`   - enable plugin for current buffer
@@ -88,7 +90,7 @@ FileStyleFix rules
 3. If |expandtab| is set, replace tabs with spaces, if not, replace spaces
    at the beginning of a line with tabs
 
-Ignore file types
+Ignore file types                                         *g:filestyle_ignore*
 -----------------
 
 By default, **filestyle** checks all file types. To ignore a file type, for
@@ -96,7 +98,7 @@ example `text`, add the following line to your `.vimrc`:
 
     let g:filestyle_ignore = ['text']
 
-Ignore patterns
+Ignore patterns                                  *g:filestyle_ignore_patterns*
 ---------------
 
 filestyle allows you to specify patterns that should be ignored. To ignore a
@@ -105,15 +107,15 @@ your `.vimrc`:
 
     let g:filestyle_ignore_patterns = ['^\(> \?\)\+$']
 
-===============================================================================
-4. Contribution                                         *FileStyleContribution*
+==============================================================================
+4. Contribution                                        *FileStyleContribution*
 
 Source code and issues are hosted on GitHub:
 
     https://github.com/aserebryakov/filestyle
 
-===============================================================================
-5. License                                                   *FileStyleLicense*
+==============================================================================
+5. License                                                  *FileStyleLicense*
 
 Copyright 2014 Alexander Serebryakov
 
@@ -129,8 +131,8 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-===============================================================================
-6. Changelog                                               *FileStyleChangelog*
+==============================================================================
+6. Changelog                                              *FileStyleChangelog*
 
 1.0.0
 
@@ -155,8 +157,8 @@ limitations under the License.
 
 0.6.0
 
-* Added option to ignore certain file types Changed `FileStyleDeactivate` to
-* turn off highlighting in all windows of the
+* Added option to ignore certain file types
+* Changed `FileStyleDeactivate` to turn off highlighting in all windows of the
   current buffer
 * Added highlighting of control characters
 
@@ -166,8 +168,9 @@ limitations under the License.
 
 0.5.1
 
-* Added commands to enable/disable filestyle Fixed several bugs Changed
-* highlighting to use distinct colors for different violations of
+* Added commands to enable/disable filestyle
+* Fixed several bugs
+* Changed highlighting to use distinct colors for different violations of
   buffer settings
 
 0.5.0
@@ -175,11 +178,11 @@ limitations under the License.
 * Added highlighting of trailing spaces
 * Added highlighting of incorrect indentation
 
-===============================================================================
-7. Credits                                                   *FileStyleCredits*
+==============================================================================
+7. Credits                                                  *FileStyleCredits*
 
 * Alexander Serebryakov (original author)  https://github.com/aserebryakov
 * Markus Weimar                            https://github.com/Markus00000
 
-===============================================================================
-vim:tw=78:ts=8:ft=help:norl:
+==============================================================================
+# vim:tw=78:ts=8:ft=help:norl:
