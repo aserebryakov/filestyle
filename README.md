@@ -1,15 +1,17 @@
 filestyle
 =========
 
-**filestyle** is a Vim plugin that highlights whitespace that violates your
-buffer settings. This includes:
+**filestyle** is a Vim plugin that highlights unwanted whitespace and
+characters.
+
+Highlights include:
 
 * Trailing spaces
 * Tabs or spaces depending on `|expandtab|`
 * Lines longer than `|textwidth|`
 * Control characters
 
-**filestyle** also lets you fix these violations (experimental).
+**filestyle** also lets you fix these issues (experimental).
 
 ### Examples
 
@@ -22,9 +24,12 @@ buffer settings. This includes:
 Installation
 ------------
 
+#### Step 1: Install filestyle
+
 ##### Pathogen
 
-    $ cd ~/.vim/bundle $ git clone https://github.com/aserebryakov/filestyle.git
+    $ cd ~/.vim/bundle
+    $ git clone https://github.com/aserebryakov/filestyle.git
 
 ##### NeoBundle
 
@@ -32,7 +37,16 @@ Installation
 
 ##### Without plugin manager
 
-Clone this repository and copy the content to your `~/.vim/` directory.
+Clone or download this repository and copy its contents to your `~/.vim/`
+directory.
+
+#### Step 2: Check your colorscheme (Vim only)
+
+When using Vim (not gVim), make sure your colorscheme explicitly defines
+`ctermbg` in a `Normal` highlight group as it is required for the ignore
+patterns feature. For example:
+
+    hi Normal ctermbg=15
 
 Usage
 -----
@@ -41,27 +55,27 @@ Usage
 
 ##### Commands
 
-  * `FileStyleEnable`     - enable plugin globally
-  * `FileStyleDisable`    - disable plugin globally
-  * `FileStyleActivate`   - enable plugin for current buffer
-  * `FileStyleDeactivate` - disable plugin for current buffer
-  * `FileStyleCheck`      - check current buffer
-  * `FileStyleFix`        - fix style errors
+* `FileStyleEnable`     - enable plugin globally
+* `FileStyleDisable`    - disable plugin globally
+* `FileStyleActivate`   - enable plugin for current buffer
+* `FileStyleDeactivate` - disable plugin for current buffer
+* `FileStyleCheck`      - check current buffer
+* `FileStyleFix`        - fix style errors
 
 ##### Highlighting rules
 
 1. If `|expandtab|` is set, highlight tabs (RED), if not, highlight spaces at
-the beginning of a line (YELLOW).
-1. Highlight trailing spaces (CYAN)
-1. Highlight line parts that exceed `|textwidth|` (INVERT)
-1. Highlight control characters (BLUE)
+   the beginning of a line (YELLOW).
+2. Highlight trailing spaces (CYAN)
+3. Highlight line parts that exceed `|textwidth|` (INVERT)
+4. Highlight control characters (BLUE)
 
 ##### FileStyleFix rules
 
 1. Remove control characters
-1. Remove trailing spaces
-1. If `|expandtab|` is set, replace tabs with spaces, if not, replace spaces at
-the beginning of a line with tabs
+2. Remove trailing spaces
+3. If `|expandtab|` is set, replace tabs with spaces, if not, replace spaces
+   at the beginning of a line with tabs
 
 ##### Ignore file types
 
@@ -72,23 +86,32 @@ example `text`, add the following line to your `.vimrc`:
 
 ##### Ignore patterns
 
-**filestyle** allows to specify patterns that should be ignored by the plugin.
-Add the following line to your `.vimrc` to specify ignored patters:
+**filestyle** allows you to specify patterns that should be ignored. To ignore
+a pattern, for example quoted lines starting with `>`, add the following line
+to your `.vimrc`:
 
-    let g:filestyle_ignore_patterns = ['^>\s\+']
-
-**NOTE:** In case of Vim usage from a terminal, `ctermbg` should be explicitly
-defined in a `Normal` highlight group.
+    let g:filestyle_ignore_patterns = ['^\(> \?\)\+$']
 
 Contribution
 ------------
 
-Source code and issues of the plugin are hosted on GitHub:
+Source code and issues are hosted on GitHub:
 
     https://github.com/aserebryakov/filestyle
 
+License
+-------
+
+[Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0)
+
 Changelog
 ---------
+
+#### 1.0.0
+
+* Implemented ignored patterns
+* Removed highlighting of trailing spaces in current line when in Insert mode
+* Improved order of highlights
 
 #### 0.7.1
 
@@ -97,9 +120,9 @@ Changelog
 #### 0.7.0
 
 * Implemented style errors fixing (experimental)
-* Added commands to enable/disable the plugin globally
+* Added commands to enable/disable filestyle globally
 * Fixed highlighting of the EOL
-* Fixed disabling the plugin for specific buffers
+* Fixed disabling filestyle for specific buffers
 
 #### 0.6.1
 
@@ -118,7 +141,7 @@ Changelog
 
 #### 0.5.1
 
-* Added commands to enable/disable the plugin
+* Added commands to enable/disable filestyle
 * Fixed several bugs
 * Changed highlighting to use distinct colors for different violations of
   buffer settings
@@ -127,3 +150,9 @@ Changelog
 
 * Added highlighting of trailing spaces
 * Added highlighting of incorrect indentation
+
+Credits
+-------
+
+* Alexander Serebryakov, original author ([GitHub](https://github.com/aserebryakov))
+* Markus Weimar ([GitHub](https://github.com/Markus00000))
