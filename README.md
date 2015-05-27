@@ -92,6 +92,11 @@ to your `.vimrc`:
 
     let g:filestyle_ignore_patterns = ['^\(> \?\)\+$']
 
+##### Notes
+
+* `textwidth` change can not be handled automatically. `FileStyleCheck` must
+  be executed to update highlighting
+
 Contribution
 ------------
 
