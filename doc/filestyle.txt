@@ -16,13 +16,13 @@ CONTENTS                                                   *FileStyleContents*
 ==============================================================================
 1. Introduction                                        *FileStyleIntroduction*
 
-*filestyle* highlights unwanted whitespace and characters.
+filestyle highlights unwanted whitespace and characters.
 
 Highlights include:
 
 * Trailing spaces
-* Tabs or spaces depending on |expandtab|
-* Lines longer than |textwidth|
+* Tabs or spaces depending on 'expandtab'
+* Lines longer than 'textwidth'
 * Control characters
 
 filestyle also lets you fix these issues (experimental).
@@ -34,17 +34,17 @@ filestyle also lets you fix these issues (experimental).
 ---------------------
 
 Pathogen:
-
+>
     $ cd ~/.vim/bundle
     $ git clone https://github.com/aserebryakov/filestyle.git
-
+<
 NeoBundle:
-
+>
     NeoBundle 'aserebryakov/filestyle'
-
+<
 Without plugin manager:
 
-    Clone or download this repository and copy its contents to your `~/.vim/`
+    Clone or download this repository and copy its contents to your ~/.vim/
     directory.
 
 2.2 Check your colorscheme (Vim only)
@@ -53,9 +53,9 @@ Without plugin manager:
 When using Vim (not gVim), make sure your colorscheme explicitly defines
 |ctermbg| in a |Normal| highlight group as it is required for the ignore
 patterns feature. For example:
-
+>
     hi Normal ctermbg=15
-
+<
 ==============================================================================
 3. Usage                                                      *FileStyleUsage*
 
@@ -66,20 +66,20 @@ Commands
                                         *:FileStyleEnable* *:FileStyleDisable*
                                    *:FileStyleActivate* *:FileStyleDeactivate*
                                              *:FileStyleCheck* *:FileStyleFix*
-* `FileStyleEnable`     - enable plugin globally
-* `FileStyleDisable`    - disable plugin globally
-* `FileStyleActivate`   - enable plugin for current buffer
-* `FileStyleDeactivate` - disable plugin for current buffer
-* `FileStyleCheck`      - check current buffer
-* `FileStyleFix`        - fix style errors
+* :FileStyleEnable     - enable plugin globally
+* :FileStyleDisable    - disable plugin globally
+* :FileStyleActivate   - enable plugin for current buffer
+* :FileStyleDeactivate - disable plugin for current buffer
+* :FileStyleCheck      - check current buffer
+* :FileStyleFix        - fix style errors
 
 Highlighting rules
 ------------------
 
-1. If |expandtab| is set, highlight tabs (RED), if not, highlight spaces at
+1. If 'expandtab' is set, highlight tabs (RED), if not, highlight spaces at
    the beginning of a line (YELLOW).
 2. Highlight trailing spaces (CYAN)
-3. Highlight line parts that exceed |textwidth| (INVERT)
+3. Highlight line parts that exceed 'textwidth' (INVERT)
 4. Highlight control characters (BLUE)
 
 FileStyleFix rules
@@ -87,31 +87,32 @@ FileStyleFix rules
 
 1. Remove control characters
 2. Remove trailing spaces
-3. If |expandtab| is set, replace tabs with spaces, if not, replace spaces
+3. If 'expandtab' is set, replace tabs with spaces, if not, replace spaces
    at the beginning of a line with tabs
 
 Ignore file types                                         *g:filestyle_ignore*
 -----------------
 
-By default, **filestyle** checks all file types. To ignore a file type, for
-example `text`, add the following line to your `.vimrc`:
-
+By default, filestyle checks all file types. To ignore a file type, for
+example "text", add the following line to your vimrc:
+>
     let g:filestyle_ignore = ['text']
-
+<
 Ignore patterns                                  *g:filestyle_ignore_patterns*
 ---------------
 
 filestyle allows you to specify patterns that should be ignored. To ignore a
-pattern, for example quoted lines starting with `>`, add the following line to
-your `.vimrc`:
-
+pattern, for example quoted lines starting with ">", add the following line to
+your vimrc:
+>
     let g:filestyle_ignore_patterns = ['^\(> \?\)\+$']
+<
+Known issues                                            *FileStyleKnownIssues*
+------------
 
-Notes
------
-
-* |textwidth| change can not be handled automatically. |FileStyleCheck| must
-  be executed to update highlighting
+filestyle cannot detect 'textwidth' changes. If you change 'textwidth',
+execute |:FileStyleCheck| to ensure the new width is used for highlighting
+long lines.
 
 ==============================================================================
 4. Contribution                                        *FileStyleContribution*
@@ -164,7 +165,7 @@ limitations under the License.
 0.6.0
 
 * Added option to ignore certain file types
-* Changed `FileStyleDeactivate` to turn off highlighting in all windows of the
+* Changed |FileStyleDeactivate| to turn off highlighting in all windows of the
   current buffer
 * Added highlighting of control characters
 

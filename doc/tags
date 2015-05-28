@@ -10,6 +10,7 @@ FileStyleContribution	filestyle.txt	/*FileStyleContribution*
 FileStyleCredits	filestyle.txt	/*FileStyleCredits*
 FileStyleInstallation	filestyle.txt	/*FileStyleInstallation*
 FileStyleIntroduction	filestyle.txt	/*FileStyleIntroduction*
+FileStyleKnownIssues	filestyle.txt	/*FileStyleKnownIssues*
 FileStyleLicense	filestyle.txt	/*FileStyleLicense*
 FileStyleUsage	filestyle.txt	/*FileStyleUsage*
 filestyle	filestyle.txt	/*filestyle*
