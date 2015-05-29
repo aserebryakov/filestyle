@@ -7,8 +7,8 @@ characters.
 Highlights include:
 
 * Trailing spaces
-* Tabs or spaces depending on `|expandtab|`
-* Lines longer than `|textwidth|`
+* Tabs or spaces depending on `'expandtab'`
+* Lines longer than `'textwidth'`
 * Control characters
 
 **filestyle** also lets you fix these issues (experimental).
@@ -55,26 +55,26 @@ Usage
 
 ##### Commands
 
-* `FileStyleEnable`     - enable plugin globally
-* `FileStyleDisable`    - disable plugin globally
-* `FileStyleActivate`   - enable plugin for current buffer
-* `FileStyleDeactivate` - disable plugin for current buffer
-* `FileStyleCheck`      - check current buffer
-* `FileStyleFix`        - fix style errors
+* `:FileStyleEnable`     - enable plugin globally
+* `:FileStyleDisable`    - disable plugin globally
+* `:FileStyleActivate`   - enable plugin for current buffer
+* `:FileStyleDeactivate` - disable plugin for current buffer
+* `:FileStyleCheck`      - check current buffer
+* `:FileStyleFix`        - fix style errors
 
 ##### Highlighting rules
 
-1. If `|expandtab|` is set, highlight tabs (RED), if not, highlight spaces at
+1. If `'expandtab'` is set, highlight tabs (RED), if not, highlight spaces at
    the beginning of a line (YELLOW).
 2. Highlight trailing spaces (CYAN)
-3. Highlight line parts that exceed `|textwidth|` (INVERT)
+3. Highlight line parts that exceed `'textwidth'` (INVERT)
 4. Highlight control characters (BLUE)
 
 ##### FileStyleFix rules
 
 1. Remove control characters
 2. Remove trailing spaces
-3. If `|expandtab|` is set, replace tabs with spaces, if not, replace spaces
+3. If `'expandtab'` is set, replace tabs with spaces, if not, replace spaces
    at the beginning of a line with tabs
 
 ##### Ignore file types
@@ -92,10 +92,11 @@ to your `.vimrc`:
 
     let g:filestyle_ignore_patterns = ['^\(> \?\)\+$']
 
-##### Notes
+##### Known issues
 
-* `textwidth` change can not be handled automatically. `FileStyleCheck` must
-  be executed to update highlighting
+**filestyle** cannot detect `'textwidth'` changes. If you change `'textwidth'`,
+execute `:FileStyleCheck` to ensure the new width is used for highlighting long
+lines.
 
 Contribution
 ------------
@@ -136,7 +137,7 @@ Changelog
 #### 0.6.0
 
 * Added option to ignore certain file types
-* Changed `FileStyleDeactivate` to turn off highlighting in all windows of the
+* Changed `:FileStyleDeactivate` to turn off highlighting in all windows of the
   current buffer
 * Added highlighting of control characters
 
