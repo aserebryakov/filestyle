@@ -108,9 +108,13 @@ function! FileStyleHighlightPattern(highlight)
       let l:priority = g:filestyle_default_match_priority
   endif
 
-  call matchadd(a:highlight['highlight'],
-              \ a:highlight['pattern'],
-              \ l:priority)
+  try
+    call matchadd(a:highlight['highlight'],
+                \ a:highlight['pattern'],
+                \ l:priority)
+  catch /E28:/
+    " Do nothing
+  endtry
 endfunction!
 
 
@@ -197,18 +201,26 @@ endfunction!
 
 "Sets the trailing spaces to be ignored in a current line
 function! FileStyleIgnoreTrailingSpacesInCurrentLine()
-    let g:filestyle_current_line = line('.')
+  let g:filestyle_current_line = line('.')
+  try
     let g:filestyle_current_line_match =  matchadd(
         \ 'FileStyleIgnoredPattern',
         \ '\%' . g:filestyle_current_line . 'l\s\+$',
         \ 10)
+  catch /E28:/
+    " Do nothing
+  endtry
 endfunction!
 
 
 "Removes ignoring trailing spaces from matches list
 function! FileStyleNotIgnoreTrailingSpaces()
   if exists('g:filestyle_current_line_match')
-    call matchdelete(g:filestyle_current_line_match)
+    try
+      call matchdelete(g:filestyle_current_line_match)
+    catch /E803:/
+      " Do nothing
+    endtry
   endif
 endfunction!
 
@@ -223,7 +235,7 @@ function! FileStyleIgnoreTrailingSpaces()
       return
     endif
   else
-      call FileStyleIgnoreTrailingSpacesInCurrentLine()
+    call FileStyleIgnoreTrailingSpacesInCurrentLine()
   endif
 endfunction!
 
