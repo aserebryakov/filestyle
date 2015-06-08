@@ -86,7 +86,7 @@ endfunction!
 "Clear matches if name of the file is the same as given
 function! FileStyleClearFile(filename)
   if a:filename == expand('%:p')
-    call clearmatches()
+    call FileStyleClearBufferMatches()
   endif
 endfunction!
 
@@ -108,9 +108,9 @@ function! FileStyleHighlightPattern(highlight)
       let l:priority = g:filestyle_default_match_priority
   endif
 
-  call matchadd(a:highlight['highlight'],
-              \ a:highlight['pattern'],
-              \ l:priority)
+  return matchadd(a:highlight['highlight'],
+                \ a:highlight['pattern'],
+                \ l:priority)
 endfunction!
 
 
@@ -123,7 +123,8 @@ function! FileStyleExpandtabCheck()
     let l:highlight = {'highlight' : 'FileStyleSpacesError',
                      \ 'pattern' : '^\t* \+'}
   endif
-  call FileStyleHighlightPattern(l:highlight)
+  call add(w:filestyle_buffer_matches,
+         \ FileStyleHighlightPattern(l:highlight))
 endfunction!
 
 
@@ -131,7 +132,8 @@ endfunction!
 function! FileStyleTrailingSpaces()
     let l:highlight = {'highlight' : 'FileStyleTrailingSpacesError',
                      \ 'pattern': '\s\+$'}
-  call FileStyleHighlightPattern(l:highlight)
+  call add(w:filestyle_buffer_matches,
+         \ FileStyleHighlightPattern(l:highlight))
 endfunction!
 
 
@@ -140,7 +142,8 @@ function! FileStyleLongLines()
   if &textwidth > 0
     let l:highlight = {'highlight' : 'FileStyleTooLongLine',
                      \ 'pattern': '\%>' . &textwidth . 'v.\+' }
-    call FileStyleHighlightPattern(l:highlight)
+    call add(w:filestyle_buffer_matches,
+           \ FileStyleHighlightPattern(l:highlight))
   endif
 endfunction!
 
@@ -149,7 +152,8 @@ endfunction!
 function! FileStyleControlCharacters()
   let l:highlight = {'highlight' : 'FileStyleControlCharacter',
                    \ 'pattern': '[\x00-\x08\x0a-\x1f]'}
-  call FileStyleHighlightPattern(l:highlight)
+  call add(w:filestyle_buffer_matches,
+         \ FileStyleHighlightPattern(l:highlight))
 endfunction!
 
 
@@ -160,7 +164,8 @@ function! FileStyleClearIgnoredPatters()
           let l:highlight = {'highlight' : 'FileStyleIgnoredPattern',
                            \ 'pattern': pattern,
                            \ 'priority': 10}
-          call FileStyleHighlightPattern(l:highlight)
+          call add(w:filestyle_buffer_matches,
+                 \ FileStyleHighlightPattern(l:highlight))
       endfor
   endif
 endfunction!
@@ -187,36 +192,45 @@ function! FileStyleInsertModeLeave()
     autocmd!
   augroup end
 
-  "Cleaning up variables
+  "Cleaning up
   call FileStyleNotIgnoreTrailingSpaces()
-  unlet g:filestyle_current_line
-  unlet g:filestyle_current_line_match
 
 endfunction!
 
 
 "Sets the trailing spaces to be ignored in a current line
 function! FileStyleIgnoreTrailingSpacesInCurrentLine()
-    let g:filestyle_current_line = line('.')
-    let g:filestyle_current_line_match =  matchadd(
+    let w:filestyle_current_line = line('.')
+    let w:filestyle_current_line_match =  matchadd(
         \ 'FileStyleIgnoredPattern',
-        \ '\%' . g:filestyle_current_line . 'l\s\+$',
+        \ '\%' . w:filestyle_current_line . 'l\s\+$',
         \ 10)
+    echo 'Ignore'
 endfunction!
 
 
 "Removes ignoring trailing spaces from matches list
 function! FileStyleNotIgnoreTrailingSpaces()
-  if exists('g:filestyle_current_line_match')
-    call matchdelete(g:filestyle_current_line_match)
+  if exists('w:filestyle_current_line_match')
+    call matchdelete(w:filestyle_current_line_match)
+    unlet w:filestyle_current_line
+    unlet w:filestyle_current_line_match
+  endif
+endfunction!
+
+
+"Removes ignoring trailing spaces from matches list in normal mode
+function! FileStyleNotIgnoreTrailingSpacesInNormalMode()
+  if mode('') == 'n'
+    call FileStyleNotIgnoreTrailingSpaces()
   endif
 endfunction!
 
 
 "Sets trailing spaces to be ignored
 function! FileStyleIgnoreTrailingSpaces()
-  if exists('g:filestyle_current_line')
-    if(g:filestyle_current_line != line('.'))
+  if exists('w:filestyle_current_line')
+    if(w:filestyle_current_line != line('.'))
       call FileStyleNotIgnoreTrailingSpaces()
       call FileStyleIgnoreTrailingSpacesInCurrentLine()
     else
@@ -224,6 +238,17 @@ function! FileStyleIgnoreTrailingSpaces()
     endif
   else
       call FileStyleIgnoreTrailingSpacesInCurrentLine()
+  endif
+endfunction!
+
+
+"Clearing current buffer matches
+function! FileStyleClearBufferMatches()
+  if exists('w:filestyle_buffer_matches') != 0
+    for l:match_id in w:filestyle_buffer_matches
+      call matchdelete(l:match_id)
+    endfor
+    let w:filestyle_buffer_matches = []
   endif
 endfunction!
 
@@ -238,12 +263,17 @@ function! FileStyleCheck()
     return
   endif
 
-  call clearmatches()
+  if exists('w:filestyle_buffer_matches') == 0
+    let w:filestyle_buffer_matches = []
+  endif
+
+  call FileStyleClearBufferMatches()
   call FileStyleTrailingSpaces()
   call FileStyleExpandtabCheck()
   call FileStyleControlCharacters()
   call FileStyleLongLines()
   call FileStyleClearIgnoredPatters()
+
 endfunction!
 
 
@@ -325,7 +355,7 @@ endfunction!
 "Disable plugin globally
 function! FileStyleDisable()
   let g:filestyle_enabled = 0
-  windo call clearmatches()
+  windo call FileStyleClearBufferMatches()
   wincmd w
 endfunction!
 
@@ -350,6 +380,7 @@ if !exists('g:filestyle_plugin')
     autocmd!
     autocmd BufReadPost,VimEnter,FileType * call FileStyleActivate()
     autocmd WinEnter * call FileStyleCheck()
+    autocmd WinEnter * call FileStyleNotIgnoreTrailingSpacesInNormalMode()
     autocmd ColorScheme * call FileStyleCreateHighlightGroups()
     autocmd InsertEnter * call FileStyleInsertModeEnter()
     autocmd InsertLeave * call FileStyleInsertModeLeave()
