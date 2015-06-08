@@ -92,6 +92,23 @@ to your `.vimrc`:
 
     let g:filestyle_ignore_patterns = ['^\(> \?\)\+$']
 
+##### Change highlight groups
+
+**filestyle** currently uses these highlight groups:
+
+    FileStyleTabsError
+    FileStyleTrailingSpacesError
+    FileStyleSpacesError
+    FileStyleControlCharacter
+    FileStyleTooLongLine
+    FileStyleIgnoredPattern
+
+Note that `FileStyleIgnoredPattern` is only used in gVim.
+
+You can change a highlight group in your `.vimrc` or color scheme like this:
+
+    highlight FileStyleTabsError ctermbg=3 guibg=Yellow
+
 ##### Known issues
 
 **filestyle** cannot detect `'textwidth'` changes. If you change `'textwidth'`,
@@ -112,6 +129,10 @@ License
 
 Changelog
 ---------
+
+#### 1.0.1
+
+* Added support for user-defined highlight groups
 
 #### 1.0.0
 

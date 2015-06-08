@@ -49,14 +49,26 @@ endfunction!
 
 "Create highlight groups
 function! FileStyleCreateHighlightGroups()
-  highlight FileStyleTabsError ctermbg=Red guibg=Red
-  highlight FileStyleTrailingSpacesError ctermbg=Cyan guibg=Cyan
-  highlight FileStyleSpacesError ctermbg=Yellow guibg=Yellow
-  highlight FileStyleControlCharacter ctermbg=Blue guibg=Blue
-  highlight FileStyleTooLongLine cterm=inverse gui=inverse
+  if !hlexists('FileStyleTabsError')
+    highlight FileStyleTabsError ctermbg=Red guibg=Red
+  endif
+  if !hlexists('FileStyleTrailingSpacesError')
+    highlight FileStyleTrailingSpacesError ctermbg=Cyan guibg=Cyan
+  endif
+  if !hlexists('FileStyleSpacesError')
+    highlight FileStyleSpacesError ctermbg=Yellow guibg=Yellow
+  endif
+  if !hlexists('FileStyleControlCharacter')
+    highlight FileStyleControlCharacter ctermbg=Blue guibg=Blue
+  endif
+  if !hlexists('FileStyleTooLongLine')
+    highlight FileStyleTooLongLine cterm=inverse gui=inverse
+  endif
 
   if has('gui_running')
-    highlight FileStyleIgnoredPattern guibg=bg gui=NONE
+    if !hlexists('FileStyleIgnoredPattern')
+      highlight FileStyleIgnoredPattern guibg=bg gui=NONE
+    endif
   else
     call FileStyleCreateIgnoredPatternGroup()
   endif
