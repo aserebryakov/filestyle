@@ -130,6 +130,10 @@ License
 Changelog
 ---------
 
+#### 1.0.1
+
+* Added support for user-defined highlight groups
+
 #### 1.0.0
 
 * Implemented ignored patterns
