@@ -249,7 +249,11 @@ endfunction!
 
 "Remove trailing spaces
 function! FileStyleTrailngSpacesFix()
+  let s:buffer_status = @p
+  silent! execute 'norm! mz'
   silent! execute '%s/\s\+$//'
+  silent! execute 'norm! `z'
+  let @p = s:buffer_status
 endfunction!
 
 
