@@ -130,7 +130,7 @@ License
 Changelog
 ---------
 
-#### 1.0.1
+#### 1.1.0
 
 * Added support for user-defined highlight groups
 * Fixed issue with tabs switching in INSERT mode
