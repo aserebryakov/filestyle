@@ -133,6 +133,7 @@ Changelog
 #### 1.0.1
 
 * Added support for user-defined highlight groups
+* Fixed issue with tabs switching in INSERT mode
 
 #### 1.0.0
 
