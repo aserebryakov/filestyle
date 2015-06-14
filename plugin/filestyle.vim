@@ -291,7 +291,9 @@ endfunction!
 
 "Remove trailing spaces
 function! FileStyleTrailngSpacesFix()
+  silent! execute 'norm! mz'
   silent! execute '%s/\s\+$//'
+  silent! execute 'norm! `z'
 endfunction!
 
 
