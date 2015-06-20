@@ -111,9 +111,12 @@ You can change a highlight group in your `.vimrc` or color scheme like this:
 
 ##### Known issues
 
-**filestyle** cannot detect `'textwidth'` changes. If you change `'textwidth'`,
-execute `:FileStyleCheck` to ensure the new width is used for highlighting long
-lines.
+* **filestyle** cannot detect `'textwidth'` changes. If you change `'textwidth'`,
+  execute `:FileStyleCheck` to ensure the new width is used for highlighting long
+  lines.
+
+* Error E315 is be thrown by Vim in case of `'splitbelow'` option is set
+  when `'help'` command is called
 
 Contribution
 ------------
@@ -129,6 +132,10 @@ License
 
 Changelog
 ---------
+
+#### 1.1.1
+
+* Fixed cursor positioning after FileStyleFix call
 
 #### 1.1.0
 
