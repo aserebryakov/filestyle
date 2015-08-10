@@ -133,6 +133,10 @@ License
 Changelog
 ---------
 
+#### 1.1.2
+
+* Fixed tag and version number in help file
+
 #### 1.1.1
 
 * Fixed cursor positioning after FileStyleFix call
