@@ -1,4 +1,5 @@
-*filestyle.txt*    Version 1.0.0
+*filestyle.txt*    Version 1.1.2
+*filestyle*
 
 Highlights unwanted whitespace and characters.
 
@@ -161,6 +162,10 @@ limitations under the License.
 
 ==============================================================================
 6. Changelog                                              *FileStyleChangelog*
+
+1.1.2
+
+* Fixed tag and version number in help file
 
 1.1.1
 
