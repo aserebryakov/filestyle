@@ -17,13 +17,13 @@
 
 "Create ignored pattern highlight group
 function! FileStyleCreateIgnoredPatternGroup()
-  let l:colors = ''
+  let l:normal_group = ''
 
-  redir => l:colors
-  silent highlight
+  redir => l:normal_group
+  silent highlight Normal
   redir END
 
-  let l:normal_start = match(l:colors, 'Normal\s\+xxx')
+  let l:normal_start = match(l:normal_group, 'Normal\s\+xxx')
 
   "Normal highlight group should be defined explicitly
   if (l:normal_start == -1)
@@ -31,8 +31,7 @@ function! FileStyleCreateIgnoredPatternGroup()
     return
   endif
 
-  let l:normal_end = match(l:colors, '\n', l:normal_start)
-  let l:normal_group = l:colors[(l:normal_start):(l:normal_end)]
+  let l:normal_group = substitute(l:normal_group, '\n', '', 'g')
 
   if (match(l:normal_group, 'ctermbg=') == -1)
     echom 'FileStyle: ctermbg parameter should be defined explicitly'

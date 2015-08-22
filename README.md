@@ -135,6 +135,7 @@ Changelog
 
 #### 1.1.2
 
+* Fixed error messages when Vim is started in a narrow terminal
 * Fixed tag and version number in help file
 
 #### 1.1.1
