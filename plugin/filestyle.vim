@@ -1,3 +1,6 @@
+
+
+
 "   Copyright 2014 Alexander Serebryakov
 "
 "   Licensed under the Apache License, Version 2.0 (the "License");
@@ -296,6 +299,14 @@ function! FileStyleTrailngSpacesFix()
 endfunction!
 
 
+"Remove blank lines at the end of the file
+function! FileStyleBlankLinesFix()
+  silent! execute 'norm! mz'
+  silent! execute 'g/\v^$\n*%$/norm! dd'
+  silent! execute 'norm! `z'
+endfunction!
+
+
 "Function iterating over entire buffer and processing each
 "line with a given function
 function! FileStyleDoForEachLine(function)
@@ -354,6 +365,7 @@ function! FileStyleFix()
   call FileStyleControlCharactersFix()
   call FileStyleTrailngSpacesFix()
   call FileStyleExpandtabFix()
+  call FileStyleBlankLinesFix()
 endfunction!
 
 

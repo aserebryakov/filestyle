@@ -74,7 +74,8 @@ Usage
 
 1. Remove control characters
 2. Remove trailing spaces
-3. If `'expandtab'` is set, replace tabs with spaces, if not, replace spaces
+3. Remove blank lines at the end of the file
+4. If `'expandtab'` is set, replace tabs with spaces, if not, replace spaces
    at the beginning of a line with tabs
 
 ##### Ignore file types
