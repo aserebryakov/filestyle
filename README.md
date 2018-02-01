@@ -57,6 +57,7 @@ Usage
 
 * `:FileStyleEnable`     - enable plugin globally
 * `:FileStyleDisable`    - disable plugin globally
+* `:FileStyleToggle`     - toggle enable/disable plugin globally
 * `:FileStyleActivate`   - enable plugin for current buffer
 * `:FileStyleDeactivate` - disable plugin for current buffer
 * `:FileStyleCheck`      - check current buffer
