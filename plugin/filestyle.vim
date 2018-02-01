@@ -373,12 +373,27 @@ function! FileStyleDisable()
 endfunction!
 
 
+"Toggle enable/disable plugin
+function! FileStyleToggle()
+  if g:filestyle_toggle
+    call FileStyleDisable()
+    let g:filestyle_toggle = 0
+	echo "filestyle disabled"
+  else
+    call FileStyleEnable()
+    let g:filestyle_toggle = 1
+	echo "filestyle enabled"
+  endif
+endfunction!
+
+
 "Plugin startup code
 if !exists('g:filestyle_plugin')
   let g:filestyle_plugin = 1
   let g:filestyle_enabled = 1
   let g:filestyle_default_match_priority = 1
   let g:filestyle_ignore_default = ['help', 'nerdtree']
+  let g:filestyle_toggle = 1
 
   if !exists('g:filestyle_ignore')
     let g:filestyle_ignore = g:filestyle_ignore_default
@@ -402,6 +417,7 @@ if !exists('g:filestyle_plugin')
   "Defining plugin commands
   command! FileStyleEnable call FileStyleEnable()
   command! FileStyleDisable call FileStyleDisable()
+  command! FileStyleToggle call FileStyleToggle()
   command! FileStyleActivate call FileStyleActivate()
   command! FileStyleDeactivate call FileStyleDeactivate()
   command! FileStyleCheck call FileStyleCheck()
