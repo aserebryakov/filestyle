@@ -33,9 +33,12 @@ function! FileStyleCreateIgnoredPatternGroup()
 
   let l:normal_group = substitute(l:normal_group, '\n', '', 'g')
 
+  "ctermbg parameter should be defined explicitly
   if (match(l:normal_group, 'ctermbg=') == -1)
-    echom 'FileStyle: ctermbg parameter should be defined explicitly'
-    return
+    let l:normal_group = substitute(l:normal_group,
+                                  \ 'cleared',
+                                  \ 'ctermbg=none',
+                                  \ '')
   endif
 
   let l:ignored_group = substitute(l:normal_group,
