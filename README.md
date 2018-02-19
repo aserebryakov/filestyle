@@ -133,6 +133,10 @@ License
 Changelog
 ---------
 
+#### 1.2.0
+
+* To be added
+
 #### 1.1.2
 
 * Fixed error messages when Vim is started in a narrow terminal
