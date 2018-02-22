@@ -165,6 +165,10 @@ limitations under the License.
 ==============================================================================
 6. Changelog                                              *FileStyleChangelog*
 
+1.2.0
+
+* Added FileStyleToggle command
+
 1.1.2
 
 * Fixed error messages when Vim is started in a narrow terminal

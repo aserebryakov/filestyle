@@ -134,6 +134,10 @@ License
 Changelog
 ---------
 
+#### 1.2.0
+
+* Added `FileStyleToggle` command
+
 #### 1.1.2
 
 * Fixed error messages when Vim is started in a narrow terminal
