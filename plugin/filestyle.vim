@@ -27,14 +27,18 @@ function! FileStyleCreateIgnoredPatternGroup()
 
   "Normal highlight group should be defined explicitly
   if (l:normal_start == -1)
-    echom 'FileStyle: Normal highlight group is not found'
+    echom 'FileStyle: Normal highlight group is not found.
+         \ Ignored patterns are disabled'
+    execute 'highlight clear FileStyleIgnoredPattern'
     return
   endif
 
   let l:normal_group = substitute(l:normal_group, '\n', '', 'g')
 
   if (match(l:normal_group, 'ctermbg=') == -1)
-    echom 'FileStyle: ctermbg parameter should be defined explicitly'
+    echom 'FileStyle: ctermbg parameter should be defined explicitly.
+         \ Ignored patterns are disabled'
+    execute 'highlight clear FileStyleIgnoredPattern'
     return
   endif
 

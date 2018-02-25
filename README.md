@@ -137,6 +137,7 @@ Changelog
 #### 1.2.0
 
 * Added `FileStyleToggle` command
+* Fixed the error if default colorscheme is used
 
 #### 1.1.2
 
