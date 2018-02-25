@@ -65,10 +65,12 @@ filestyle automatically checks each opened file.
 Commands
 --------
                                         *:FileStyleEnable* *:FileStyleDisable*
+					                    *:FileStyleToggle*
                                    *:FileStyleActivate* *:FileStyleDeactivate*
                                              *:FileStyleCheck* *:FileStyleFix*
 * :FileStyleEnable     - enable plugin globally
 * :FileStyleDisable    - disable plugin globally
+* :FileStyleToggle     - toggle enable/disable plugin globally
 * :FileStyleActivate   - enable plugin for current buffer
 * :FileStyleDeactivate - disable plugin for current buffer
 * :FileStyleCheck      - check current buffer
@@ -162,6 +164,11 @@ limitations under the License.
 
 ==============================================================================
 6. Changelog                                              *FileStyleChangelog*
+
+1.2.0
+
+* Added FileStyleToggle command
+* Fixed the error if default colorscheme is used
 
 1.1.2
 

@@ -57,6 +57,7 @@ Usage
 
 * `:FileStyleEnable`     - enable plugin globally
 * `:FileStyleDisable`    - disable plugin globally
+* `:FileStyleToggle`     - toggle enable/disable plugin globally
 * `:FileStyleActivate`   - enable plugin for current buffer
 * `:FileStyleDeactivate` - disable plugin for current buffer
 * `:FileStyleCheck`      - check current buffer
@@ -132,6 +133,11 @@ License
 
 Changelog
 ---------
+
+#### 1.2.0
+
+* Added `FileStyleToggle` command
+* Fixed the error if default colorscheme is used
 
 #### 1.1.2
 
